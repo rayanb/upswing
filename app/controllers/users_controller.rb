@@ -15,10 +15,10 @@ class UsersController < ApplicationController
   def create
     user = User.find_by(email: params[:email])
     if user
-      redirect_to user
+      render json: "redirect to news feed"
     else
       user = User.create(email: params[:email])
-      redirect_to edit_user_path(user.id)
+      render json: "redirect to edit page"
     end
   end
 

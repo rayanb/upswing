@@ -20,13 +20,13 @@ describe UsersController do
 
   it 'has a create route that redirects to user news feed if user exists' do
     post :create, {email: user.email}
-    expect(response).to redirect_to("/users/#{user.id}")
+    expect(response.body).to include("redirect to news feed")
   end
 
   it 'has a create route that redirects to edit profile if user doesnt exist' do
     post :create, {email: "bouts@gmail.com"}
     new_user = User.find_by(email: "bouts@gmail.com")
-    expect(response).to redirect_to("/users/#{new_user.id}/edit")
+    expect(response.body).to include("redirect to edit page")
   end
 
   it 'has an edit page, which is redirected from the signup' do
