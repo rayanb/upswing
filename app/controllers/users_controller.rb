@@ -9,11 +9,17 @@ class UsersController < ApplicationController
   end
 
   def new
-    render json: "Linkedin signup all the time, if first time redirect to "
+    render json: "Linkedin signup all the time"
   end
 
   def create
-    render json: "Should do some operation on the backend to process linkedin"
+    user = User.find_by(email: params[:email])
+    if user
+      redirect_to user
+    else
+      user = User.create(email: params[:email])
+      redirect_to edit_user_path(user.id)
+    end
   end
 
   def edit
@@ -21,8 +27,10 @@ class UsersController < ApplicationController
   end
 
   def update
+    render json: "Saves in the database all golf info"
   end
 
   def delete
+    render json: "Deleted my record from the database"
   end
 end
