@@ -13,11 +13,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:email])
-    if user
+    existing_user = User.find_by(email: params[:email])
+    if existing_user
       render json: "redirect to news feed"
     else
       user = User.create(email: params[:email])
+      puts "redirect to edit_user_path(user.id)"
       render json: "redirect to edit page"
     end
   end
@@ -30,7 +31,7 @@ class UsersController < ApplicationController
     render json: "Saves in the database all golf info"
   end
 
-  def delete
-    render json: "Deleted my record from the database"
+  def destroy
+    render json: "destroyed the user"
   end
 end
