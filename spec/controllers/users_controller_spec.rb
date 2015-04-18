@@ -1,14 +1,15 @@
 require 'rails_helper'
 
-describe UsersController do
+describe Api::UsersController do
 
-  let!(:user){User.create(email: "rayanbouts@gmail.com")}
+  let!(:user){User.create(name: 'Rayan', email: "rayanbouts@gmail.com")}
 
   describe 'GET USERS' do
 
     it 'has an index that renders a json of all the users' do
+      expected = [{id: user.id, name: user.name, email: user.email}].to_json
       get :index
-      expect(response.body).to include("I am a json object that returns all users")
+      expect(response.body).to eq(expected)
     end
 
     it 'has a show page that renders one user object' do
