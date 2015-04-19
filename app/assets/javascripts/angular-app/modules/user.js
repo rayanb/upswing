@@ -1,7 +1,1 @@
-exampleApp = angular
-  .module('app.exampleApp', [
-  ])
-  .run(function(){
-    console.log('exampleApp running');
-  }
-  )
+golfApp = angular.module('app.golfApp', [])

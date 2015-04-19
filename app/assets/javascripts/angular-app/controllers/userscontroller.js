@@ -1,7 +1,10 @@
-angular.module('app.golfApp', []).controller("usersController", [
-  '$scope',
-  function($scope){
-    console.log('ExampleCtrl running');
-    $scope.user = {name: "Rayan", profession: "Web Dev"}
+golfApp.controller("usersController", [
+  '$scope', 'Users',
+  function($scope, Users){
+    var prefs = JSON.stringify(['businessman', 'golfer'])
+    // add an event listener that triggers this function after preferences set up
+    Users.getAll(prefs, function(data){
+      $scope.users = data;
+    })
   }
 ])
