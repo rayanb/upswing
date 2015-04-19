@@ -4,7 +4,6 @@ class Api::UsersController < ApplicationController
     serialized_users =
       ActiveModel::ArraySerializer
                .new(User.all, each_serializer: UserSerializer)
-
     render json: serialized_users
   end
 
