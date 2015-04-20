@@ -5,16 +5,19 @@ golfApp.controller("usersController", [
     // add an event listener that triggers this function after preferences set up
     var getUsers = function(){
       Users.getAll(prefs, function(data){
-        $scope.users = data;
+        $scope.users = data.users;
+        console.log(data)
+        $scope.currentUser = data.currentUser;
       });
     }
 
-    getUsers()
+    getUsers();
 
-    $scope.createUser = function(){
+    $scope.createConnection = function(currentUser, friendId){
       Users.createUser({name: 'Rayan', email: $('.name').val()})
       getUsers()
       return false;
     };
+
   }
 ])
