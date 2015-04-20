@@ -5,7 +5,9 @@ class Api::UsersController < ApplicationController
     serialized_users =
       ActiveModel::ArraySerializer
         .new(User.all, each_serializer: UserSerializer)
-    render json: serialized_users
+        puts "SESH"
+    puts session
+    render json: {users: serialized_users, currentUser: session[:user_id]}
   end
 
   def show
@@ -17,8 +19,10 @@ class Api::UsersController < ApplicationController
   end
 
   def create
-    if User.from_omniauth(env["omniauth.auth"]) == "already"
-      render json: "news"
+    user_creation     = User.from_omniauth(env["omniauth.auth"])
+    session[:user_id] = user_creation[:user].id
+    if user_creation[:message] == "already"
+      redirect_to '/'
     else
       render json: "edit"
     end
