@@ -2,9 +2,11 @@ class Api::UsersController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
+    #have params transformed to an array of ids and select users with that array
+    industry_ids = JSON.parse(params[:industryIds])
     serialized_users =
       ActiveModel::ArraySerializer
-        .new(User.all, each_serializer: UserSerializer)
+        .new(User.where(industry_id: industry_ids), each_serializer: UserSerializer)
     render json: {users: serialized_users, currentUser: session[:user_id]}
   end
 
@@ -12,7 +14,7 @@ class Api::UsersController < ApplicationController
     serialized_user =
       UserSerializer
         .new(User.find(params[:id]))
-    render json: {users: serialized_user, currentUser: session[:user_id]}
+    render json: serialized_user
   end
 
   def new

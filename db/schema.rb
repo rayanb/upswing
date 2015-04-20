@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415203034) do
+ActiveRecord::Schema.define(version: 20150420183332) do
+
+  create_table "industries", force: :cascade do |t|
+    t.string "name", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                                                                                                                                               null: false
@@ -21,7 +25,7 @@ ActiveRecord::Schema.define(version: 20150415203034) do
     t.string   "oauth_token",                                                                                                                                        null: false
     t.string   "location",                                                                                                                                           null: false
     t.string   "picture_url",      default: "https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png"
-    t.string   "industry",                                                                                                                                           null: false
+    t.integer  "industry_id",                                                                                                                                        null: false
     t.string   "job"
     t.datetime "oauth_expires_at"
     t.datetime "created_at",                                                                                                                                         null: false
