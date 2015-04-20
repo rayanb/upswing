@@ -5,13 +5,14 @@ class Api::UsersController < ApplicationController
     serialized_users =
       ActiveModel::ArraySerializer
         .new(User.all, each_serializer: UserSerializer)
-        puts "SESH"
-    puts session
     render json: {users: serialized_users, currentUser: session[:user_id]}
   end
 
   def show
-    render json: "I am a single user"
+    serialized_user =
+      UserSerializer
+        .new(User.find(params[:id]))
+    render json: {users: serialized_user, currentUser: session[:user_id]}
   end
 
   def new
