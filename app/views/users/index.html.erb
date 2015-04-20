@@ -1,5 +1,9 @@
 <div ng-app="app.golfApp" ng-controller="usersController">
+  <input class="name">
+  <button ng-click="createUser()">Create</button>
   <div ng-repeat="user in users">
     <div> {{user}} </div>
   </div>
 </div>
+
+<%= link_to "Sign in with Linkedin", "/auth/linkedin", id: "sign_in" %>
