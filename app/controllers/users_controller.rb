@@ -10,6 +10,11 @@ class UsersController < ApplicationController
   end
 
   def create
+    if User.from_omniauth(env["omniauth.auth"]) == "already"
+      render json: "news"
+    else
+      render json: "edit"
+    end
   end
 
   def edit
@@ -20,4 +25,5 @@ class UsersController < ApplicationController
 
   def destroy
   end
+
 end
