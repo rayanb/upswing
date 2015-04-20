@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  belongs_to :industry
+
   def self.exists?(email)
     if User.find_by(email: email)
       return "already"
@@ -17,7 +19,7 @@ class User < ActiveRecord::Base
       user.email       = auth.info.email
       user.location    = auth.info.location.name
       user.picture_url = auth.info.image
-      user.industry    = auth.extra.raw_info.industry
+      user.industry    = Industry.find_or_create_by(name: auth.extra.raw_info.industry)
       user.job         = auth.extra.raw_info.headline
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
