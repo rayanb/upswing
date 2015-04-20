@@ -14,10 +14,18 @@
 ActiveRecord::Schema.define(version: 20150415203034) do
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email",      null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",                                                                                                                                               null: false
+    t.string   "email",                                                                                                                                              null: false
+    t.string   "provider",                                                                                                                                           null: false
+    t.string   "uid",                                                                                                                                                null: false
+    t.string   "oauth_token",                                                                                                                                        null: false
+    t.string   "location",                                                                                                                                           null: false
+    t.string   "picture_url",      default: "https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png"
+    t.string   "industry",                                                                                                                                           null: false
+    t.string   "job"
+    t.datetime "oauth_expires_at"
+    t.datetime "created_at",                                                                                                                                         null: false
+    t.datetime "updated_at",                                                                                                                                         null: false
   end
 
 end
