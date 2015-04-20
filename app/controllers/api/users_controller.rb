@@ -1,9 +1,10 @@
 class Api::UsersController < ApplicationController
+  skip_before_filter :verify_authenticity_token
 
   def index
     serialized_users =
       ActiveModel::ArraySerializer
-               .new(User.all, each_serializer: UserSerializer)
+        .new(User.all, each_serializer: UserSerializer)
     render json: serialized_users
   end
 
@@ -16,14 +17,10 @@ class Api::UsersController < ApplicationController
   end
 
   def create
-    existing_user = User.find_by(email: params[:email])
-    if existing_user
-
-      render json: "redirect to news feed"
+    if User.from_omniauth(env["omniauth.auth"]) == "already"
+      render json: "news"
     else
-      user = User.create(email: params[:email])
-      puts "redirect to edit_user_path(user.id)"
-      render json: "redirect to edit page"
+      render json: "edit"
     end
   end
 
