@@ -1,23 +1,42 @@
 golfApp.controller("usersController", [
-  '$scope', 'Users',
-  function($scope, Users){
-    var prefs = JSON.stringify([1])
-    // add an event listener that triggers this function after preferences set up
-    var getUsers = function(){
-      Users.getAll(prefs, function(data){
+  '$scope', 'Users', 'Industries',
+  function($scope, Users, Industries){
+
+    $scope.users =[];
+
+
+    var getUsers = function(prefs){
+      choices = JSON.stringify(prefs)
+      Users.getAll(choices, function(data){
         $scope.users = data.users;
-        console.log(data)
         $scope.currentUser = data.currentUser;
       });
     }
 
-    getUsers();
+    Industries.getAll(function(data){
+      $scope.industries = data.industries;
+      console.log(data.industries)
+    });
 
     $scope.createConnection = function(currentUser, friendId){
       Users.createUser({name: 'Rayan', email: $('.name').val()})
-      getUsers()
+      getUsers();
       return false;
     };
 
+    $scope.createPreferences = function(data){
+      var selectedPrefs = [];
+      $('input[name="preference"]:checked').map(function(){
+        selectedPrefs.push(parseInt(this.value));
+        this.checked = false;
+      });
+      getUsers(selectedPrefs)
+      return false;
+    }
+
+    $scope.pickUser = function(user){
+      $scope.users.splice(0, 1)
+      console.log($scope.users)
+    }
   }
 ])
