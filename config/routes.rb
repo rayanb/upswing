@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users, defaults: { format: :json }
     resources :friendships, defaults: { format: :json }, only: [:create, :destroy, :update]
+    get '/industries', to: 'industries#index'
   end
 
   get 'auth/:provider/callback', to: 'api/users#create'
