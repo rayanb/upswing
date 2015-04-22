@@ -8,4 +8,13 @@ module UsersHelper
     end
   end
 
+  def serialized_current_user
+    user = User.find_by(id: session[:user_id])
+    if user
+      UserSerializer.new(user).serializable_hash
+    else
+      nil
+    end
+  end
+
 end
