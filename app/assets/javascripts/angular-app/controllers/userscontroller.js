@@ -1,7 +1,7 @@
 golfApp.controller("usersController", [
   '$scope', 'Users',
   function($scope, Users){
-    var prefs = JSON.stringify(['businessman', 'golfer'])
+    var prefs = JSON.stringify([1])
     // add an event listener that triggers this function after preferences set up
     var getUsers = function(){
       Users.getAll(prefs, function(data){
