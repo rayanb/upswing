@@ -4,16 +4,17 @@ describe Api::UsersController do
   let!(:industry){Industry.create(name: "Tech")}
   let!(:user){User.create(name: 'Rayan', email: "rayanbouts@gmail.com", provider: "test", uid: "test", oauth_token: "test", location: "San Francisco", industry_id: industry.id, job: "Web Dev", oauth_expires_at: Time.new())}
 
+
   describe 'GET USERS' do
 
     it 'has an index that renders a json of all the users' do
       expected = {users: [{id: user.id, name: user.name, email: user.email,job: user.job, location: user.location, industry: {id: industry.id, name: industry.name} }], currentUser: nil}.to_json
-      get :index, {industryIds: [1].to_json}
+      get :index, {industryIds: [industry.id].to_json}
       expect(response.body).to eq(expected)
     end
 
     it 'has a show page that renders one user object' do
-      expected = {user: {id: user.id, name: user.name, email: user.email,job: user.job, location: user.location, industry: {id: industry.id, name: industry.name}}}.to_json
+      expected = {user: {id: user.id, name: user.name, email: user.email,job: user.job, location: user.location, industry: {id: industry.id, name: industry.name}}, currentUser: nil}.to_json
       get :show, {id: user.id}
       expect(response.body).to eq(expected)
     end
@@ -52,9 +53,9 @@ describe Api::UsersController do
       expect(response.body).to include("Saves in the database all golf info")
     end
 
-    it 'lets you delete yourself' do
+    it 'lets you sign out' do
       delete :destroy, {id: user.id}
-      expect(response.body).to include("destroyed the user")
+      expect(response).to be_redirect
     end
 
   end
