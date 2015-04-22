@@ -10,6 +10,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :picture_url, default: "https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png"
       t.references :industry, null: false
       t.string :job
+      t.references :golfcourse
+      t.string :handicap
+      t.string :description
       t.datetime :oauth_expires_at
       t.timestamps null: false
     end
