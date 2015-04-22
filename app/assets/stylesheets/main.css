@@ -1,0 +1,28 @@
+
+.oauth_linkedin{
+  width: 10em;
+  margin-left: 20em;
+}
+
+.navbar{
+  background-color: #95a5a6;
+
+}
+
+.collapse{
+  color: white;
+}
+
+.icon-bar{
+   background-color: white;
+}
+
+.profile_img{
+  margin-top: -0.2em !important;
+  width: 2.05em;
+}
+
+.navbar-nav li a {
+  font-size: 16px;
+  margin-top: 10px !important;
+}
