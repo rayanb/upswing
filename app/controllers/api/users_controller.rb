@@ -1,20 +1,20 @@
 class Api::UsersController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  include UsersHelper
 
   def index
-    #have params transformed to an array of ids and select users with that array
     industry_ids = JSON.parse(params[:industryIds])
     serialized_users =
       ActiveModel::ArraySerializer
         .new(User.where(industry_id: industry_ids), each_serializer: UserSerializer)
-    render json: {users: serialized_users, currentUser: session[:user_id]}
+    render json: {users: serialized_users, currentUser: serialized_current_user}
   end
 
   def show
     serialized_user =
       UserSerializer
-        .new(User.find(params[:id]))
-    render json: serialized_user
+        .new(User.find(params[:id])).serializable_hash
+    render json: {user: serialized_user, currentUser: serialized_current_user}
   end
 
   def new
@@ -25,9 +25,9 @@ class Api::UsersController < ApplicationController
     user_creation     = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user_creation[:user].id
     if user_creation[:message] == "already"
-      redirect_to '/'
+      redirect_to users_path
     else
-      render json: "edit"
+      redirect_to edit_user_path(session[:user_id])
     end
   end
 
@@ -39,8 +39,14 @@ class Api::UsersController < ApplicationController
     render json: "Saves in the database all golf info"
   end
 
+  def logout
+    session[:user_id] = nil
+    redirect_to '/'
+  end
+
   def destroy
-    render json: "destroyed the user"
+    session[:user_id] = nil
+    redirect_to '/'
   end
 
 end
