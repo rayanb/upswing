@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
 
   belongs_to :industry
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
   def self.exists?(email)
     if User.find_by(email: email)
@@ -11,6 +15,7 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
+    puts auth
     message = User.exists?(auth.info.email)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.provider    = auth.provider
