@@ -1,6 +1,6 @@
 golfApp.controller("usersController", [
-  '$scope', 'Users', 'Industries',
-  function($scope, Users, Industries){
+  '$scope', 'Users', 'Industries', 'Friendship',
+  function($scope, Users, Industries, Friendship){
 
     $scope.users =[];
 
@@ -18,12 +18,6 @@ golfApp.controller("usersController", [
       console.log(data.industries)
     });
 
-    $scope.createConnection = function(currentUser, friendId){
-      Users.createUser({name: 'Rayan', email: $('.name').val()})
-      getUsers();
-      return false;
-    };
-
     $scope.createPreferences = function(data){
       var selectedPrefs = [];
       $('input[name="preference"]:checked').map(function(){
@@ -34,9 +28,23 @@ golfApp.controller("usersController", [
       return false;
     }
 
-    $scope.pickUser = function(user){
-      $scope.users.splice(0, 1)
-      console.log($scope.users)
+    $scope.createConnection = function(user){
+        console.log(user)
+        console.log($scope.currentUser)
+      if(user.user.has_liked_current_user == true){
+        Friendship.create(user, $scope.currentUser)
+      }
+      else{
+        Friendship.createRequest(user, $scope.currentUser)
+      }
+      $scope.users.splice(0, 1);
+      console.log($scope.users);
+    }
+
+    $scope.createDisconnection = function(user){
+      $scope.users.splice(0, 1);
+      console.log("delete user through service");
+
     }
   }
 ])
