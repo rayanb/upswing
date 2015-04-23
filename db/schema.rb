@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(version: 20150421151344) do
 
   create_table "friend_requests", force: :cascade do |t|
-    t.integer "requested_user_id",  null: false
-    t.integer "requesting_user_id", null: false
+    t.integer "user_id",   null: false
+    t.integer "friend_id", null: false
   end
 
   create_table "friendships", force: :cascade do |t|
