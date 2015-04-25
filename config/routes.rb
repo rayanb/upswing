@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
 
   namespace :api do
-    resources :users, defaults: { format: :json }
+    resources :users, defaults: { format: :json } do
+      get '/friends', to: 'friendships#index'
+    end
     resources :friendships, defaults: { format: :json }, only: [:create, :destroy, :update]
     get '/industries', to: 'industries#index'
     post '/friendships', to: 'friendships#create'
