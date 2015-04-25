@@ -1,7 +1,6 @@
-
 <div ng-controller="usersController">
 
-  <form ng-submit="createPreferences()" id="prefs">
+  <form ng-submit="createPreferences()" id="prefs" ng-show="doneSearch==false">
     <div ng-repeat="industry in industries">
       <input type="checkbox" value="{{industry.id}}" name="preference" class="checkradio">
       <span>{{industry.name}}</span>
@@ -9,11 +8,14 @@
    <input type="submit">
   </form>
 
-
   <div class="user" ng-show="users.length > 0">
     <p>{{users[0]}}</p>
     <img ng-src="{{users[0].picture_url}}">
     <button ng-click="createConnection(users[0])">Yes</button>
+  </div>
+
+  <div ng-show="noUsers==true">
+    <h1> No users to display for the moment </h1>
   </div>
 
 </div>
