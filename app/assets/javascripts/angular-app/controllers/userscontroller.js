@@ -4,12 +4,21 @@ golfApp.controller("usersController", [
 
     $scope.users =[];
 
+    $scope.doneSearch = false;
+
+    $scope.noUsers = false;
 
     var getUsers = function(prefs){
       choices = JSON.stringify(prefs)
       Users.getAll(choices, function(data){
         $scope.users = data.users;
         $scope.currentUser = data.currentUser;
+        $scope.doneSearch = true;
+        if($scope.users.length == 0){
+          $scope.noUsers=true;
+        }
+        console.log($scope.users)
+        console.log($scope.currentUser)
       });
     }
 
@@ -29,14 +38,14 @@ golfApp.controller("usersController", [
     }
 
     $scope.createConnection = function(user){
-        console.log(user)
-        console.log($scope.currentUser)
-      if(user.user.has_liked_current_user == true){
-        Friendship.create(user, $scope.currentUser)
-      }
-      else{
-        Friendship.createRequest(user, $scope.currentUser)
-      }
+      console.log(user)
+      console.log($scope.currentUser)
+      Friendship.create(user, $scope.currentUser,
+        function(type){
+          if(type.data=="friendship"){
+            $('body').append('<h1>'+user.name+' got a match</h1>')
+          }
+        })
       $scope.users.splice(0, 1);
       console.log($scope.users);
     }
