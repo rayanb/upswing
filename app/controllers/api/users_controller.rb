@@ -4,19 +4,16 @@ class Api::UsersController < ApplicationController
 
   def index
     industry_ids = JSON.parse(params[:industryIds])
-    serialized_users =
-    User.includes(:industry).where(industry_id: industry_ids).map do |user|
-      user.has_liked_current_user = user.has_liked_current_user?(session[:user_id])
-      UserSerializer.new(user)
-    end
+    cuser = User.includes(:friends, :inverse_friends).find(session[:user_id])
+    users = User.where.not(id: session[:user_id]).where(industry_id: industry_ids) - cuser.friends - cuser.inverse_friends
+     serialized_users = ActiveModel::ArraySerializer
+         .new(users, each_serializer: UserSerializer)
+
     render json: {users: serialized_users, currentUser: serialized_current_user}
   end
 
   def show
-    serialized_user =
-      UserSerializer
-        .new(User.find(params[:id])).serializable_hash
-    render json: {user: serialized_user, currentUser: serialized_current_user}
+    render json: serialized_current_user
   end
 
   def new
