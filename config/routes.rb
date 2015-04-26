@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get '/industries', to: 'industries#index'
     post '/friendships', to: 'friendships#create'
     post '/friendrequests', to: 'friendrequests#create'
+    get '/current_user', to: 'users#current'
   end
 
   get 'auth/:provider/callback', to: 'api/users#create'
