@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
 
-  attr_accessor :has_liked_current_user
-
   belongs_to :industry
   has_many :friendships
   has_many :friends, :through => :friendships
@@ -34,14 +32,6 @@ class User < ActiveRecord::Base
       @current_user = user
     end
     return {message: message, user: @current_user}
-  end
-
-  def has_liked_current_user?(current)
-    if FriendRequest.find_by(user_id: id, friend_id: current)
-      true
-    else
-      false
-    end
   end
 
 end
