@@ -12,8 +12,11 @@ class Api::UsersController < ApplicationController
     render json: {users: serialized_users, currentUser: serialized_current_user}
   end
 
-  def show
+  def current
     render json: serialized_current_user
+  end
+
+  def show
   end
 
   def new
