@@ -6,9 +6,8 @@ golfApp.service("Friendship", ['$log', '$http', function($log, $http){
       })
     },
     getAll: function(callback){
-      $http.get('/api/users/1/friends').then(function(data){
-        console.log(data)
-        callback(data)
+      $http.get('/api/'+window.location.pathname+'/friends').then(function(response){
+        callback(response.data)
       })
     }
   }
