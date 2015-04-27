@@ -40,7 +40,7 @@ golfApp.controller("usersController", [
     $scope.createConnection = function(user){
       console.log(user)
       console.log($scope.currentUser)
-      Friendship.create(user, $scope.currentUser,
+      Friendship.create($scope.currentUser, user ,
         function(type){
           if(type.data=="friendship"){
             $('body').append('<h1>'+user.name+' got a match</h1>')
@@ -53,7 +53,6 @@ golfApp.controller("usersController", [
     $scope.createDisconnection = function(user){
       $scope.users.splice(0, 1);
       console.log("delete user through service");
-
     }
   }
 ])
