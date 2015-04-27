@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+  has_many :friend_requests
+  has_many :requests, :through => :friend_requests, source: :friend
 
   def self.exists?(email)
     if User.find_by(email: email)
@@ -12,6 +14,10 @@ class User < ActiveRecord::Base
     else
       return "new user"
     end
+  end
+
+  def all_friends
+    friends + inverse_friends
   end
 
   def self.from_omniauth(auth)
