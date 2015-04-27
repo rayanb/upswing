@@ -25,6 +25,7 @@ gem 'sass-rails', '>= 3.2'
 
 
 group :development, :test do
+  gem 'faker'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'rspec-rails'
