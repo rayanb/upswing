@@ -4,7 +4,7 @@ class Api::UsersController < ApplicationController
 
   def index
     industry_ids = JSON.parse(params[:industryIds])
-    cuser = User.includes(:friends, :inverse_friends).find(session[:user_id])
+    cuser = User.includes(:industry, :friends, :inverse_friends).find(session[:user_id])
     users = User.where.not(id: session[:user_id]).where(industry_id: industry_ids) - cuser.all_friends - cuser.requests
     serialized_users = ActiveModel::ArraySerializer
          .new(users, each_serializer: UserSerializer)
