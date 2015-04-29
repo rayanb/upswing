@@ -1,4 +1,11 @@
 <div ng-controller="FriendsCtrl">
+  <div class="user">
+    <img ng-src="{{currentUser.picture_url}}">
+    <h1> {{currentUser.name}} </h1>
+    <p> {{currentUser.email}} </p>
+    <p>
+  </div>
+
   <div ng-repeat="friend in friends">
     {{friend}}
   </div>

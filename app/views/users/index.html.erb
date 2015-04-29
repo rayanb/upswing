@@ -9,7 +9,14 @@
   </form>
 
   <div class="user" ng-show="users.length > 0">
-    <p>{{users[0]}}</p>
+    <h1>{{users[0].name}}</h1>
+    <div class="professional_info">
+      <p>{{users[0].job}}</p>
+      <p>{{users[0].location}}</p>
+    </div>
+
+    <div class="golf_info">
+    </div>
     <img ng-src="{{users[0].picture_url}}">
     <button ng-click="createConnection(users[0])">Yes</button>
   </div>
