@@ -3,7 +3,9 @@ golfApp.controller('FriendsCtrl', [
   function($scope, Friendship, Users){
 
     Users.getCurrent(function(data){
-      $scope.currentUser = data.user;
+      console.log("current user")
+      $scope.currentUser = data;
+      console.log($scope.currentUser)
     })
 
     Friendship.getAll(function(data){

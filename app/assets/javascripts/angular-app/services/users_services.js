@@ -6,7 +6,7 @@ golfApp.service('Users', ['$log', '$http', function($log, $http){
       })
     },
     getCurrent: function(callback){
-      $http.get('/api/users/get_current').then(function(response){
+      $http.get('/api/current_user').then(function(response){
         console.log(response)
         callback(response.data)
       })
