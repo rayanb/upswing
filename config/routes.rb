@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users, defaults: { format: :json } do
       get '/friends', to: 'friendships#index'
+      get '/location', to: 'users#locate'
     end
     resources :friendships, defaults: { format: :json }, only: [:create, :destroy, :update]
     get '/industries', to: 'industries#index'
