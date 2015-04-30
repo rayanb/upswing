@@ -1,4 +1,11 @@
+include Geokit::Geocoders
 class User < ActiveRecord::Base
+  # For geolocalisation
+  acts_as_mappable :default_units => :miles,
+                   :default_formula => :sphere,
+                   :distance_field_name => :distance,
+                   :lat_column_name => :location_latitude,
+                   :lng_column_name => :location_longitude
 
   belongs_to :industry
   has_many :friendships
@@ -21,14 +28,14 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    puts auth
+    puts auth.inspect
     message = User.exists?(auth.info.email)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.provider    = auth.provider
       user.uid         = auth.uid
       user.name        = auth.info.name
       user.email       = auth.info.email
-      user.location    = auth.info.location.name
+      user.location_city    = auth.info.location.name
       user.picture_url = auth.info.image
       user.industry    = Industry.find_or_create_by(name: auth.extra.raw_info.industry)
       user.job         = auth.extra.raw_info.headline
@@ -39,5 +46,14 @@ class User < ActiveRecord::Base
     end
     return {message: message, user: @current_user}
   end
+
+  def locate(ip_address)
+    puts ip_address
+    location = IpGeocoder.geocode(ip_address)
+    print location.city
+    update_attributes(location_city: location.city, location_longitude: location.longitude, location_latitude: location.latitude)
+    self.save
+  end
+
 
 end
