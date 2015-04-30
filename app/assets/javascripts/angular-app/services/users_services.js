@@ -10,6 +10,11 @@ golfApp.service('Users', ['$log', '$http', function($log, $http){
         console.log(response)
         callback(response.data)
       })
+    },
+    getLocation: function(user, location){
+      $http.get('/api/users/'+user.id+'/location?ip_address='+location).then(function(response){
+        console.log(response)
+      })
     }
   }
 }])

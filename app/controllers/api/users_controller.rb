@@ -16,6 +16,13 @@ class Api::UsersController < ApplicationController
     render json: serialized_current_user
   end
 
+  def locate
+    user = User.find(session[:user_id])
+    ip = params[:ip_address]
+    user.locate(ip)
+    render json: {hey: ip}
+  end
+
   def show
     render json: "hey"
   end
