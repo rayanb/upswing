@@ -7,6 +7,9 @@ gem 'sqlite3'
 # OAUTH gems
 gem 'omniauth-linkedin-oauth2'
 
+# GEO-localisation gem
+gem 'geokit-rails'
+
 gem 'uglifier', '>= 1.3.0'
 gem 'active_model_serializers'
 
