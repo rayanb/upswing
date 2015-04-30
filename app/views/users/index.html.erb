@@ -1,5 +1,4 @@
-<div ng-controller="usersController">
-
+<div ng-controller="usersController" class="usersChoice">
   <form ng-submit="createPreferences()" id="prefs" ng-show="doneSearch==false">
     <div ng-repeat="industry in industries">
       <input type="checkbox" value="{{industry.id}}" name="preference" class="checkradio">
@@ -8,7 +7,7 @@
    <input type="submit">
   </form>
 
-  <div class="user" ng-show="users.length > 0">
+  <div class="user" style="display:none">
     <h1>{{users[0].name}}</h1>
     <div class="professional_info">
       <p>{{users[0].job}}</p>
@@ -19,11 +18,20 @@
     </div>
     <img ng-src="{{users[0].picture_url}}">
     <button ng-click="createConnection(users[0])">Yes</button>
+    <button ng-click="createDisconnection(users[0])">No</button>
+    <div ng-show="noUsers==true">
+      <h1> No users to display for the moment </h1>
+    </div>
   </div>
 
-  <div ng-show="noUsers==true">
-    <h1> No users to display for the moment </h1>
-  </div>
 
 </div>
+  <script type="application/javascript">
+    function getIP(json) {
+      console.log(json.ip)
+      LOCATION = json.ip
+    }
+  </script>
+
+  <script type="application/javascript" src="http://api.ipify.org?format=jsonp&callback=getIP"></script>
 

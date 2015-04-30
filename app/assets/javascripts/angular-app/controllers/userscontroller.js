@@ -17,15 +17,12 @@ golfApp.controller("usersController", [
         if($scope.users.length == 0){
           $scope.noUsers=true;
         }
+        $('.user').css('display', 'block')
         console.log($scope.users)
         console.log($scope.currentUser)
       });
     }
 
-    Industries.getAll(function(data){
-      $scope.industries = data.industries;
-      console.log(data.industries)
-    });
 
     $scope.createPreferences = function(data){
       var selectedPrefs = [];
@@ -54,5 +51,18 @@ golfApp.controller("usersController", [
       $scope.users.splice(0, 1);
       console.log("delete user through service");
     }
+
+    $(document).ready(function(){
+        Users.getCurrent(function(data){
+          Users.getLocation(data, LOCATION);
+        })
+
+        Industries.getAll(function(data){
+          $scope.industries = data.industries;
+          console.log(data.industries)
+        });
+    })
+
+
   }
 ])
