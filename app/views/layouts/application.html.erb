@@ -2,6 +2,8 @@
 <html ng-app="app.golfApp">
 <head>
   <title>BeinGolf</title>
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  </script>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
@@ -63,6 +65,7 @@
       </nav>
     </div>
   </header>
+
   <div class="container">
     <%= yield %>
   </div>
