@@ -8,29 +8,32 @@ golfApp.controller("usersController", [
 
     $scope.noUsers = false;
 
-    var getUsers = function(prefs){
+    var getUsers = function(prefs, range){
       choices = JSON.stringify(prefs)
-      Users.getAll(choices, function(data){
+      Users.getAll(choices, range, function(data){
         $scope.users = data.users;
         $scope.currentUser = data.currentUser;
         $scope.doneSearch = true;
         if($scope.users.length == 0){
           $scope.noUsers=true;
         }
-        $('.user').css('display', 'block')
+        if($scope.users.length){
+          $('.user').css('display', 'block')
+        }
         console.log($scope.users)
         console.log($scope.currentUser)
       });
     }
 
 
-    $scope.createPreferences = function(data){
+    $scope.createParameters = function(prefs, range){
       var selectedPrefs = [];
       $('input[name="preference"]:checked').map(function(){
         selectedPrefs.push(parseInt(this.value));
         this.checked = false;
       });
-      getUsers(selectedPrefs)
+      range = $('.range').val()
+      getUsers(selectedPrefs, range)
       return false;
     }
 
@@ -52,16 +55,14 @@ golfApp.controller("usersController", [
       console.log("delete user through service");
     }
 
-    $(document).ready(function(){
-        Users.getCurrent(function(data){
-          Users.getLocation(data, LOCATION);
-        })
-
-        Industries.getAll(function(data){
-          $scope.industries = data.industries;
-          console.log(data.industries)
-        });
+    Users.getCurrent(function(data){
+      Users.getLocation(data, LOCATION);
     })
+
+    Industries.getAll(function(data){
+      $scope.industries = data.industries;
+      console.log(data.industries)
+    });
 
 
   }
