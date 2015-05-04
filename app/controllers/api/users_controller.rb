@@ -1,14 +1,11 @@
 class Api::UsersController < ApplicationController
-  skip_before_filter :verify_authenticity_token
   include UsersHelper
 
   def index
-    industry_ids = JSON.parse(params[:industryIds])
-    cuser = User.includes(:industry, :friends, :inverse_friends).find(session[:user_id])
-    users = User.where.not(id: session[:user_id]).where(industry_id: industry_ids) - cuser.all_friends - cuser.requests
+    industry_ids     = JSON.parse(params[:industryIds])
+    range            = params[:range].to_i
     serialized_users = ActiveModel::ArraySerializer
-         .new(users, each_serializer: UserSerializer)
-
+         .new(users(range, industry_ids), each_serializer: UserSerializer)
     render json: {users: serialized_users, currentUser: serialized_current_user}
   end
 
@@ -57,6 +54,13 @@ class Api::UsersController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to '/'
+  end
+
+  private
+
+  def users(range, industries)
+    cuser = User.includes(:industry, :friends, :inverse_friends).find(session[:user_id])
+    users = User.where.not(id: session[:user_id]).where(industry_id: industries).within(range, origin: cuser) - cuser.all_friends - cuser.requests
   end
 
 end
