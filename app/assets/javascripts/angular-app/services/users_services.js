@@ -1,7 +1,7 @@
 golfApp.service('Users', ['$log', '$http', function($log, $http){
   return {
-    getAll: function(industryIds, callback){
-      $http.get('/api/users?industryIds='+ industryIds).then(function(response){
+    getAll: function(industryIds, range, callback){
+      $http.get('/api/users?industryIds='+ industryIds+'&&range='+range).then(function(response){
         callback(response.data)
       })
     },
