@@ -3,7 +3,10 @@ body{
   background-color: grey;
   background-size: 100%;
   background-position: fixed;
+  zoom: 0.9;
 }
+
+
 .oauth_linkedin{
   width: 10em;
   margin-left: 20em;
