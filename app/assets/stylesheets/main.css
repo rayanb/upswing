@@ -3,7 +3,7 @@ body{
   background-color: grey;
   background-size: 100%;
   background-position: fixed;
-  zoom: 0.9;
+  zoom: 0.9 !important;
 }
 
 
