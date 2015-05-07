@@ -2,12 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 
-group :development do
-  gem 'taps'
-  gem 'rvm'
-end
+gem 'pg'
 
 # OAUTH gems
 gem 'omniauth-linkedin-oauth2'
@@ -41,5 +37,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'sqlite3'
 end
 
