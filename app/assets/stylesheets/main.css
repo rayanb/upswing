@@ -1,5 +1,5 @@
 html{
-  zoom: 0.9 !important;
+  zoom: 90% !important;
 }
 
 body{
@@ -7,7 +7,7 @@ body{
   background-color: grey;
   background-size: 100%;
   background-position: fixed;
-  zoom: 0.9 !important;
+  zoom: 90% !important;
 }
 
 
