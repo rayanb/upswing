@@ -1,3 +1,7 @@
+html{
+  zoom: 0.9 !important;
+}
+
 body{
   background-image: url('http://www.powerlineplus.com/wp-content/uploads/2013/08/Grey-background-for-site11.jpg');
   background-color: grey;
