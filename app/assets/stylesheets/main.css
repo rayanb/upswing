@@ -1,5 +1,5 @@
 html{
-  zoom: 90% !important;
+  zoom: 0.9 !important;
 }
 
 body{
@@ -7,7 +7,7 @@ body{
   background-color: grey;
   background-size: 100%;
   background-position: fixed;
-  zoom: 90% !important;
+  zoom: 0.9 !important;
 }
 
 
@@ -238,4 +238,8 @@ button.upvote{
     }
 
 
+}
+
+html{
+  zoom: 0.9 !important;
 }
