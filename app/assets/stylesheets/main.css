@@ -8,8 +8,8 @@ body{
 
 
 .oauth_linkedin{
-  width: 10em;
-  margin-left: 20em;
+  width: 10%;
+  margin-left: 20%;
 }
 
 
@@ -28,8 +28,8 @@ body{
 .profile_img{
   padding: 0 0;
   margin: 0 0 ;
-  margin-top: -0.8em !important;
-  width: 2.05em;
+  margin-top: -0.8% !important;
+  width: 2.05%;
 }
 
 .navbar-nav li a {
@@ -46,46 +46,46 @@ body{
   border-radius: 2px;
   margin: 2% 2%;
   width: 70%;
-  padding-bottom: 3em;
+  padding-bottom: 3%;
   border-radius: 10px;
 }
 
 .preferences_form{
-  padding: 4em 4em;
+  padding: 4% 4%;
 }
 
 .user_display{
-  margin: 1em 0em;
+  margin: 1% 0%;
   min-width: 330px;
-  padding: 2em 2em;
+  padding: 2% 2%;
 }
 
 .user_display button{
   margin: auto;
   position: absolute;
-  top: 22em;
-  right: 0.5em;
+  top: 22%;
+  right: 0.5%;
   background: none;
   position: center;
   color: lightblue;
   border: 0px;
-  margin-bottom: 1em;
-  margin-left: 5em;
+  margin-bottom: 1%;
+  margin-left: 5%;
 }
 
 button.upvote{
-  top: 18em;
+  top: 18%;
 }
 
 
 .profile_picture{
-  padding: 0.3em 0.3em;
-  width: 6em;
+  padding: 0.3% 0.3%;
+  width: 6%;
 }
 
 .name{
-  margin-left: 2em;
-  font-size: 3em;
+  margin-left: 2%;
+  font-size: 3%;
   font-style: bold;
 }
 
@@ -101,17 +101,17 @@ button.upvote{
   margin: 0 15%;
   padding: 0 2%;
   border: 1px solid grey;
-  background-position: 4em 4em 1em 1em;
+  background-position: 4% 4% 1% 1%;
   color: black;
   font-style: helvetica;
 }
 
 .info{
   background: rgba(255, 255, 255, 0.9);
-  margin: 0.5em 0.5em;
+  margin: 0.5% 0.5%;
   overflow: scroll;
   height: auto;
-  padding: 1em 1em;
+  padding: 1% 1%;
 }
 
 .info p{
@@ -124,12 +124,12 @@ button.upvote{
 }
 
 .user_selection{
-  height: 25em;
+  height: 25%;
   overflow: hidden;
 }
 
 .checkbox{
-  margin-left: 2em;
+  margin-left: 2%;
   width: 20%;
 }
 
@@ -140,18 +140,18 @@ button.upvote{
   position: relative;
   margin-right: 40%;
   margin-left: 40%;
-  top: 4em;
+  top: 4%;
 }
 
 .industry_name{
   float: right;
   text-align: center;
-  height: 2em;
-  top: 2em;
-  margin: 2em 2em;
+  height: 2%;
+  top: 2%;
+  margin: 2% 2%;
 }
 .industries{
-  margin-left: -10em;
+  margin-left: -10%;
 }
 
 .friend{
@@ -159,7 +159,7 @@ button.upvote{
 }
 
 .title{
-  font-size: 1.2em;
+  font-size: 1.2%;
   padding: 0 0;
   margin: 0 0;
 }
@@ -172,14 +172,14 @@ button.upvote{
 }
 .education p,
 .jobs p{
-  height: 3.2em;
+  height: 3.2%;
 }
 
 .golf_info{
-  padding-top: 4em;
+  padding-top: 4%;
 }
 .golf_info p{
-  height: 2.8em;
+  height: 2.8%;
 }
 
 .nav li a:hover{
@@ -189,7 +189,7 @@ button.upvote{
 
 .add_info{
   border-bottom: none;
-  height: 2em;
+  height: 2%;
   background-color: white !important;
 }
 
@@ -219,18 +219,18 @@ button.upvote{
     }
 
    .user_display{
-      margin: 1em 1em;
+      margin: 1% 1%;
       min-width: 330px;
-      padding: 0.5em 0.5em;
+      padding: 0.5% 0.5%;
     }
 
     .user_display button{
-      right: 4em;
-      top: 20em;
+      right: 4%;
+      top: 20%;
     }
 
     button.upvote{
-      top: 16em;
+      top: 16%;
     }
 
 
