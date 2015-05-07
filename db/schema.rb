@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421151344) do
+ActiveRecord::Schema.define(version: 20150505175826) do
+
+  create_table "educations", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "school_name"
+    t.string  "field_of_study"
+  end
 
   create_table "friend_requests", force: :cascade do |t|
     t.integer "user_id",   null: false
@@ -27,6 +33,12 @@ ActiveRecord::Schema.define(version: 20150421151344) do
     t.string "name", null: false
   end
 
+  create_table "jobs", force: :cascade do |t|
+    t.string  "company_name"
+    t.string  "title"
+    t.integer "user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name",                                                                                                                                                 null: false
     t.string   "email",                                                                                                                                                null: false
@@ -40,9 +52,14 @@ ActiveRecord::Schema.define(version: 20150421151344) do
     t.string   "picture_url",        default: "https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png"
     t.integer  "industry_id",                                                                                                                                          null: false
     t.string   "job"
-    t.string   "golfcourse"
-    t.string   "handicap"
-    t.text     "description"
+    t.string   "golfcourse",         default: "N/A"
+    t.string   "handicap",           default: "N/A"
+    t.string   "golf_associations",  default: "N/A"
+    t.string   "rounds_played",      default: "N/A"
+    t.string   "member_at",          default: "N/A"
+    t.string   "favorite_club",      default: "N/A"
+    t.string   "availability",       default: "N/A"
+    t.text     "description",        default: "N/A"
     t.datetime "oauth_expires_at"
     t.datetime "created_at",                                                                                                                                           null: false
     t.datetime "updated_at",                                                                                                                                           null: false

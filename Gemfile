@@ -6,6 +6,7 @@ gem 'sqlite3'
 
 # OAUTH gems
 gem 'omniauth-linkedin-oauth2'
+gem 'linkedin-oauth2'
 
 # GEO-localisation gem
 gem 'geokit-rails'

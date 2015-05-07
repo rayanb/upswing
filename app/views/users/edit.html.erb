@@ -1,9 +1,19 @@
-<div ng-controller="editUser">
-  <form class="edit_user">
-    <input type="text" name="job" ng-model="user.job">
-    <input type="text" name="golfCourse" ng-model="user.golfCourse" >
-    <input type="text" name="handicap" ng-model="user.handicap">
-    <input type="text" name="description" ng-model="user.description">
+<div ng-controller="editUser" class="edit_user">
+  <form class="edit_form" ng-submit="editInfo()">
+    <label> Favorite Golf Course </label><br>
+    <input type="text" name="golfcourse" value="{{currentUser.golfCourse}}" ><br>
+    <label> Handicap Index </label><br>
+    <input type="text" name="handicap" value="{{currentUser.handicap}}" ><br>
+    <label> Rounds played a year </label><br>
+    <input type="text" name="rounds_played" value="{{currentUser.rounds_played}}"><br>
+    <label> Member at </label><br>
+    <input type="text" name="member_at" value="{{currentUser.member_at}}"><br>
+    <label> Favorite Club in your bag </label><br>
+    <input type="text" name="favorite_club" value="{{currentUser.favorite_club}}"><br>
+    <label> When do you usually play </label><br>
+    <input type="text" name="availability" value="{{currentUser.availability}}"><br>
     <input type="submit">
   </form>
+
+  <!-- <img src="http://superhits106.com/files/2015/04/golf.jpg" class="edit_image"> -->
 </div>

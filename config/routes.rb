@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get '/', to: 'welcome#index'
 
-  resources :users, except: [:update, :destroy]
+  resources :users, except: [:update, :destroy] do
+    get '/friends', to: 'friendships#index'
+  end
 
 
   namespace :api do
@@ -18,6 +20,6 @@ Rails.application.routes.draw do
 
   get 'auth/:provider/callback', to: 'api/users#create'
   get 'auth/failure', to: redirect('/')
-  get 'signout', to: 'api/users#logout', as: 'signout'
+  get '/auth/signout', to: 'api/users#logout'
 
 end

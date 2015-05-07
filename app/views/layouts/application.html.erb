@@ -6,11 +6,12 @@
   </script>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-  <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+  <header class="navbar navbar-static-top bs-docs-nav" id="top navigation" role="banner">
     <div class="container">
       <div class="navbar-header">
         <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
@@ -32,13 +33,7 @@
             <a href="/users">Find People</a>
           </li>
           <li>
-            <a href="#">Find People Custom</a>
-          </li>
-          <li>
-            <a href="#">Next Events</a>
-          </li>
-          <li>
-            <a href="/users/<%=current_user.id%>">Your Profile</a>
+            <a href="/users/<%=current_user.id%>/friends">Friends</a>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -47,12 +42,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Settings<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="/users/<%=current_user.id%>/edit">Edit profile</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Nav header</li>
-              <li><a href="#">Separated link</a></li>
-              <li><a href="signout">Logout</a></li>
+              <li><a href="/auth/signout">Logout</a></li>
             </ul>
           </li>
         </ul>

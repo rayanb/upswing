@@ -8,6 +8,8 @@ golfApp.controller("usersController", [
 
     $scope.noUsers = false;
 
+    $scope.range = 5;
+
     var getUsers = function(prefs, range){
       choices = JSON.stringify(prefs)
       Users.getAll(choices, range, function(data){
@@ -38,20 +40,21 @@ golfApp.controller("usersController", [
     }
 
     $scope.createConnection = function(user){
-      console.log(user)
-      console.log($scope.currentUser)
+      $('.user'+user.id).fadeOut()
+      .animate({opacity: 0.2, right:"-=2000"}, 1500)
       Friendship.create($scope.currentUser, user ,
         function(type){
           if(type.data=="friendship"){
-            $('body').append('<h1>'+user.name+' got a match</h1>')
+            alert('You got a match with'+ user.name+', you can send an-email to connect at'+ user.email)
           }
         })
-      $scope.users.splice(0, 1);
-      console.log($scope.users);
+      var index = $scope.users.indexOf(user)
+      console.log(index)
     }
 
     $scope.createDisconnection = function(user){
-      $scope.users.splice(0, 1);
+      $('.user'+user.id).fadeOut()
+      .animate({opacity: 0.2, left:"-=2000"}, 1500)
       console.log("delete user through service");
     }
 

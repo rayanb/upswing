@@ -5,7 +5,7 @@ class Api::UsersController < ApplicationController
     industry_ids     = JSON.parse(params[:industryIds])
     range            = params[:range].to_i
     serialized_users = ActiveModel::ArraySerializer
-         .new(users(range, industry_ids), each_serializer: UserSerializer)
+         .new(find_users(range, industry_ids), each_serializer: UserSerializer)
     render json: {users: serialized_users, currentUser: serialized_current_user}
   end
 
@@ -39,14 +39,25 @@ class Api::UsersController < ApplicationController
   end
 
   def edit
-    render json: "Thats where golf info would be added"
   end
 
   def update
-    render json: "Saves in the database all golf info"
+    puts "FIRST PARAAMS"
+    puts params
+    user = User.find(session[:user_id])
+    puts "PARAAAMS"
+    puts user_params
+    user.update(user_params)
+    if user.save
+      message = "/users"
+    else
+      message = "fail"
+    end
+    render json: message
   end
 
   def logout
+    puts "h"
     session[:user_id] = nil
     redirect_to '/'
   end
@@ -58,9 +69,13 @@ class Api::UsersController < ApplicationController
 
   private
 
-  def users(range, industries)
-    cuser = User.includes(:industry, :friends, :inverse_friends).find(session[:user_id])
-    users = User.where.not(id: session[:user_id]).where(industry_id: industries).within(range, origin: cuser) - cuser.all_friends - cuser.requests
+  def find_users(range, industries)
+    cuser = User.includes(:industry, :friends, :inverse_friends, :educations, :jobs).find(session[:user_id])
+    users = User.includes(:industry, :friends, :inverse_friends, :educations, :jobs).where.not(id: session[:user_id]).where(industry_id: industries).within(range, origin: cuser) - cuser.all_friends - cuser.requests
+  end
+
+  def user_params
+    params.permit(:golf_course, :handicap, :rounds_played, :member_at, :favorite_club, :description, :availability )
   end
 
 end

@@ -6,14 +6,15 @@ class User < ActiveRecord::Base
                    :distance_field_name => :distance,
                    :lat_column_name => :location_latitude,
                    :lng_column_name => :location_longitude
-
   belongs_to :industry
   has_many :friendships
   has_many :friends, :through => :friendships
-  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key =>"friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   has_many :friend_requests
   has_many :requests, :through => :friend_requests, source: :friend
+  has_many :educations
+  has_many :jobs
 
   def self.exists?(email)
     if User.find_by(email: email)
@@ -44,6 +45,7 @@ class User < ActiveRecord::Base
       user.save!
       @current_user = user
     end
+    @current_user.sync_full_profile
     return {message: message, user: @current_user}
   end
 
@@ -52,6 +54,13 @@ class User < ActiveRecord::Base
     puts location
     update_attributes(location_city: location.city, location_state: location.state, location_longitude: location.longitude.to_f, location_latitude: location.latitude.to_f)
     self.save
+  end
+
+  def sync_full_profile
+    api = LinkedIn::API.new(oauth_token)
+    full_profile =  api.profile(fields: ["id", {"positions" => ["title", "company"]}, "educations"=>["school_name", "field_of_study"]])
+    jobs         = full_profile.positions.all[0..1].map{|position|  Job.find_or_create_by(company_name: position.company.name, title: position.title, user_id: id)}
+    education    = full_profile.educations.all[0..1].map{|school| Education.find_or_create_by(school_name: school.school_name,  field_of_study: school.field_of_study, user_id: id)}
   end
 
 end

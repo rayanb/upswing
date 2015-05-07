@@ -15,6 +15,17 @@ golfApp.service('Users', ['$log', '$http', function($log, $http){
       $http.get('/api/users/'+user.id+'/location?ip_address='+location).then(function(response){
         console.log(response)
       })
+    },
+    edit: function(current_user_id, form, callback){
+      $http.put('/api/users/'+current_user_id+'?='+ form)
+      .then(function(response){
+        if(response.data == "fail"){
+          alert('Editing failed')
+        }else{
+          callback(response.data)
+
+        }
+      })
     }
   }
 }])

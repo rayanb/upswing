@@ -1,37 +1,84 @@
+
 <div ng-controller="usersController" class="usersChoice">
-  <form ng-submit="createPreferences()" id="prefs" ng-show="doneSearch==false">
-    <div ng-repeat="industry in industries">
-      <input type="checkbox" value="{{industry.id}}" name="preference" class="checkradio">
-      <span>{{industry.name}}</span>
+
+
+  <form ng-submit="createParameters()" id="prefs" ng-show="doneSearch==false" class="form-group preferences_form">
+
+    <div class="input-group">
+      <div class="input-group-addon"><i class="fa fa-search"></i></div>
+      <input type="text" class="form-control" ng-model="searchIndustry" placeholder="Search for an industry">
     </div>
-   <input type="submit">
+
+    <div class="industries">
+      <div ng-repeat="industry in industries | orderBy: 'name' | filter: searchIndustry" class="checkbox checkbox-success industry_name">
+        <input type="checkbox" value="{{industry.id}}" name="preference">
+        <span>{{industry.name}}</span>
+      </div>
+    </div>
+
+    <div id="slider">
+      <h3> Range </h3>
+      <input class="bar range" name="range" type="range" id="rangeinput" value="10" onchange="rangevalue.value=value+' miles'" step="50" min="50" max="10000"/>
+      <span class="highlight"></span>
+      <output id="rangevalue">50 miles</output>
+      <button type="submit" class="search_users"><i class="fa fa-search fa-2x"></i></button>
+    </div>
   </form>
 
-  <div class="user" style="display:none">
-    <h1>{{users[0].name}}</h1>
-    <div class="professional_info">
-      <p>{{users[0].job}}</p>
-      <p>{{users[0].location}}</p>
+  <div class="user_selection row">
+
+    <div ng-repeat="user in users" class="user user{{user.id}}">
+      <div class="user_display">
+        <img class="profile_picture" src="{{user.picture_url}}">
+        <span class="name">{{user.name}}</span> (<i>{{user.location_city}}  {{user.location_state}}</i>)
+
+        <div class="info_img">
+          <div class="info">
+            <div class="professional_info">
+              <p class="title"> {{user.job}}</p>
+              <div class="education">
+                <b> Education </b>
+                <div ng-repeat="education in user.educations">
+                  <p>{{education.field_of_study}} at {{education.school_name}}</p>
+                </div>
+              </div>
+              <div class="jobs">
+                <div ng-repeat="job in user.jobs">
+                  <b> Jobs </b>
+                  <p>{{job.title}} @ {{job.company_name}} </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="golf_info">
+              <p> Loves to play at {{user.golfcourse}} </p>
+              <p> Handicap Index {{user.handicap}}</p>
+              <p>Rounds played a year {{user.rounds_played}}</p>
+              <p> Golf clubs member at {{user.member_at}}</p>
+              <p> Favorite club in the bag {{user.favorite_club}}</p>
+            </div>
+          </div>
+        </div>
+        <button ng-click="createConnection(user)" class="upvote"><i class="fa fa-user-plus fa-2x"></i></button>
+        <button ng-click="createDisconnection(user)">Pass</button>
+      </div>
+
     </div>
 
-    <div class="golf_info">
-    </div>
-    <img ng-src="{{users[0].picture_url}}">
-    <button ng-click="createConnection(users[0])">Yes</button>
-    <button ng-click="createDisconnection(users[0])">No</button>
-    <div ng-show="noUsers==true">
-      <h1> No users to display for the moment </h1>
-    </div>
-  </div>
-
+    <div class="user" ng-show="noUsers">
+      <div class="user_display">
+       <h1> No users to display for the moment </h1>
+     </div>
+   </div>
+ </div>
 
 </div>
-  <script type="application/javascript">
-    function getIP(json) {
-      console.log(json.ip)
-      LOCATION = json.ip
-    }
-  </script>
+<script type="application/javascript">
+function getIP(json) {
+LOCATION = json.ip
+}
+</script>
 
-  <script type="application/javascript" src="http://api.ipify.org?format=jsonp&callback=getIP"></script>
+<script type="application/javascript" src="http://api.ipify.org?format=jsonp&callback=getIP"></script>
 
+</div>
