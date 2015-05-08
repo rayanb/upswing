@@ -29,6 +29,7 @@ golfApp.controller("usersController", [
 
 
     $scope.createParameters = function(prefs, range){
+      console.log('user selection show')
       var selectedPrefs = [];
       $('input[name="preference"]:checked').map(function(){
         selectedPrefs.push(parseInt(this.value));
