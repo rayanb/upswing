@@ -1,5 +1,42 @@
-
+<link rel='stylesheet' href='https://cdn.rawgit.com/alvarotrigo/fullPage.js/master/jquery.fullPage.css'>
 <main class="bs-docs-masthead" id="content" role="main">
-  <h1>WELCOME PAGE</h1>
-  <a href="/auth/linkedin"><img src="http://test.salesloft.com/wp-content/themes/salesloft/images/button.linkedin.png" class="oauth_linkedin"></a>
+
+<div id="fullpage">
+  <div class="section " id="section0">
+    <h1>Upswing</h1>
+    <i> Slogan </i>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut arcu eget nulla consectetur tristique. Mauris vitae eros sapien. Maecenas auctor, dolor nec fermentum cursus, eros est consequat libero, ac ultricies risus est sed urna. Vestibulum pulvinar metus et turpis pulvinar, non molestie turpis finibus. In hac habitasse platea dictumst. Phasellus sed luctus tellus, eget sollicitudin magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer sed consectetur nunc, condimentum placerat nisi. Curabitur eget metus ligula. Cras quis arcu lectus. Proin et malesuada sem, quis bibendum sem. Donec interdum ante vitae lacus tincidunt luctus. Etiam et ante vitae dolor sagittis ultrices non ac metus.</p>
+
+    <p>Aenean in euismod arcu. Duis facilisis elit at cursus facilisis. Aenean vitae venenatis eros, at malesuada purus. In eu convallis tellus. Ut vitae dictum est. Nullam ligula augue, vestibulum ac tortor id, tempus porta ligula. Nulla a malesuada massa. In posuere malesuada ante, non accumsan arcu aliquet at. Suspendisse iaculis laoreet rhoncus. Fusce elementum dolor in augue bibendum ornare. Fusce a nunc turpis. Quisque in enim ac nibh fermentum scelerisque id vitae mauris. Praesent tempus, est id ornare efficitur, enim nisl ornare nisi, in dapibus nisi metus eget nulla. Sed et scelerisque mi.</p>
+  </div>
+  <div class="section" id="section1">
+    <div class="intro">
+      <p> Sign in through linkedin to be a part of the community </p>
+      <a href="/auth/linkedin"><img src="http://test.salesloft.com/wp-content/themes/salesloft/images/button.linkedin.png" class="oauth_linkedin" style="width: 20%"></a>
+    </div>
+  </div>
+  <div class="section" id="section2">
+    <div class="intro">
+      <h1>The Team</h1>
+      <p></p>
+    </div>
+  </div>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+<script src='https://cdn.rawgit.com/alvarotrigo/fullPage.js/master/jquery.fullPage.min.js'></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#fullpage').fullpage({
+    anchors: ['firstPage', 'secondPage', '3rdPage'],
+    menu: '#menu',
+    loopTop: true,
+    loopBottom: true
+  });
+});
+</script>
+
 </main>
