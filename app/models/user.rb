@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
     api          = LinkedIn::API.new(oauth_token)
     full_profile =  api.profile(fields: ["id", {"positions" => ["title", "company"]}, "educations"=>["school_name", "field_of_study"]])
     positions    = full_profile.positions.all.take(2)
-    education    = full_profile.educations.take(2)
+    education    = full_profile.educations.all.take(2)
     if positions.length > 0
       positions.map{|position|  Job.find_or_create_by(company_name: position.company.name, title: position.title, user_id: id)}
     end
