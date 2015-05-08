@@ -2,11 +2,8 @@
 <html ng-app="app.golfApp">
 <head>
   <title>BeinGolf</title>
-  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
-  </script>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body style="zoom:0.9">
@@ -47,9 +44,10 @@
           </li>
         </ul>
         <% else %>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">About</a></li>
-          <li><a href="#">Team</a></li>
+        <ul class="nav navbar-nav navbar-right" id="">
+          <li data-menuanchor="firstPage" class="active"><a href="#firstPage">About</a></li>
+          <li data-menuanchor="secondPage"><a href="#secondPage">Sign In</a></li>
+          <li data-menuanchor="3rdPage"><a href="#3rdPage">Team</a></li>
           <% end  %>
         </ul>
       </nav>
