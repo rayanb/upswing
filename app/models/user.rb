@@ -57,10 +57,16 @@ class User < ActiveRecord::Base
   end
 
   def sync_full_profile
-    api = LinkedIn::API.new(oauth_token)
+    api          = LinkedIn::API.new(oauth_token)
     full_profile =  api.profile(fields: ["id", {"positions" => ["title", "company"]}, "educations"=>["school_name", "field_of_study"]])
-    jobs         = full_profile.positions.all[0..1].map{|position|  Job.find_or_create_by(company_name: position.company.name, title: position.title, user_id: id)}
-    education    = full_profile.educations.all[0..1].map{|school| Education.find_or_create_by(school_name: school.school_name,  field_of_study: school.field_of_study, user_id: id)}
+    positions    = full_profile.positions.all.take(2)
+    education    = full_profile.educations.take(2)
+    if positions.length > 0
+      positions.map{|position|  Job.find_or_create_by(company_name: position.company.name, title: position.title, user_id: id)}
+    end
+    if education.length > 0
+      education.map{|school| Education.find_or_create_by(school_name: school.school_name,  field_of_study: school.field_of_study, user_id: id)}
+    end
   end
 
 end
