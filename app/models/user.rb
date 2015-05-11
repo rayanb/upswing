@@ -38,8 +38,8 @@ class User < ActiveRecord::Base
       user.email       = auth.info.email
       user.location_city    = auth.info.location.name
       user.picture_url = auth.info.image
-      user.industry    = Industry.find_or_create_by(name: auth.extra.raw_info.industry)
-      user.job         = auth.extra.raw_info.headline
+      user.industry    = Industry.find_or_create_by(name: auth.extra.raw_info.industry) if auth.extra.raw_info.industry
+      user.job         = auth.extra.raw_info.headline if auth.extra.raw_info.headline
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
@@ -58,13 +58,15 @@ class User < ActiveRecord::Base
   def sync_full_profile
     api          = LinkedIn::API.new(oauth_token)
     full_profile =  api.profile(fields: ["id", {"positions" => ["title", "company"]}, "educations"=>["school_name", "field_of_study"]])
-    positions    = full_profile.positions.all.take(2)
-    education    = full_profile.educations.all.take(2)
-    if positions.length > 0
-      positions.map{|position|  Job.find_or_create_by(company_name: position.company.name, title: position.title, user_id: id)}
-    end
-    if education.length > 0
-      education.map{|school| Education.find_or_create_by(school_name: school.school_name,  field_of_study: school.field_of_study, user_id: id)}
+    if full_profile
+      positions    = full_profile.positions.all.take(2)
+      education    = full_profile.educations.all.take(2)
+      if positions.length > 0
+        positions.map{|position|  Job.find_or_create_by(company_name: position.company.name, title: position.title, user_id: id)}
+      end
+      if education.length > 0
+        education.map{|school| Education.find_or_create_by(school_name: school.school_name,  field_of_study: school.field_of_study, user_id: id)}
+      end
     end
   end
 
