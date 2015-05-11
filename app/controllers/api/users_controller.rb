@@ -30,6 +30,7 @@ class Api::UsersController < ApplicationController
 
   def create
     user_creation     = User.from_omniauth(env["omniauth.auth"])
+    puts "IT WAS HERE FOR A WHILE"
     session[:user_id] = user_creation[:user].id
     if user_creation[:message] == "already"
       redirect_to users_path
