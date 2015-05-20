@@ -5,7 +5,6 @@ golfApp.controller('editUser', ['$scope', 'Users', function($scope, Users){
   })
 
   $scope.editInfo = function(){
-    console.log("hey")
     var form = $('.edit_form').serialize();
     Users.edit($scope.currentUser.id, form, function(data){
       window.location.replace(data)

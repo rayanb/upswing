@@ -7,13 +7,12 @@ golfApp.service('Users', ['$log', '$http', function($log, $http){
     },
     getCurrent: function(callback){
       $http.get('/api/current_user').then(function(response){
-        console.log(response)
         callback(response.data)
       })
     },
     getLocation: function(user, location){
       $http.get('/api/users/'+user.id+'/location?ip_address='+location).then(function(response){
-        console.log(response)
+        console.log("Got users")
       })
     },
     edit: function(current_user_id, form, callback){
@@ -23,7 +22,6 @@ golfApp.service('Users', ['$log', '$http', function($log, $http){
           alert('Editing failed')
         }else{
           callback(response.data)
-
         }
       })
     }

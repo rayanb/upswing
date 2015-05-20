@@ -22,14 +22,12 @@ golfApp.controller("usersController", [
         if($scope.users.length){
           $('.user').css('display', 'block')
         }
-        console.log($scope.users)
-        console.log($scope.currentUser)
       });
     }
 
 
     $scope.createParameters = function(prefs, range){
-      console.log('user selection show')
+
       var selectedPrefs = [];
       $('input[name="preference"]:checked').map(function(){
         selectedPrefs.push(parseInt(this.value));
@@ -46,17 +44,15 @@ golfApp.controller("usersController", [
       Friendship.create($scope.currentUser, user ,
         function(type){
           if(type.data=="friendship"){
-            alert('You got a match with'+ user.name+', you can send an-email to connect at'+ user.email)
+            alert('You got a match with '+ user.name+', you can send an-email to connect at '+ user.email)
           }
         })
-      var index = $scope.users.indexOf(user)
-      console.log(index)
+      var index = $scope.users.inde
     }
 
     $scope.createDisconnection = function(user){
       $('.user'+user.id).fadeOut()
       .animate({opacity: 0.2, left:"-=2000"}, 1500)
-      console.log("delete user through service");
     }
 
     Users.getCurrent(function(data){
@@ -65,7 +61,7 @@ golfApp.controller("usersController", [
 
     Industries.getAll(function(data){
       $scope.industries = data.industries;
-      console.log(data.industries)
+
     });
 
 
