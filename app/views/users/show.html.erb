@@ -3,22 +3,22 @@
     <div class="slide" id="slide1">
       <div class="user">
         <div class="user_display">
-          <img class="profile_picture" src="{{currentUser.picture_url}}">
+          <img class="profile_picture" ng-src="{{currentUser.picture_url}}">
           <span class="name">{{currentUser.name}}</span> (<i>{{currentUser.location_city}}  {{currentUser.location_state}}</i>)<a href="/users/{{currentUser.id}}/edit"> Edit profile </a>
           <div class="info_img">
             <div class="info">
               <div class="professional_info">
                 <p class="title"> {{currentUser.job}}</p>
-                <div class="education">
-                <b> Education </b>
-                <div ng-repeat="education in currentUser.educations">
-                  <p>{{education.field_of_study}} at {{education.school_name}}</p>
-                </div>
-              </div>
                 <div class="jobs">
                   <b> Jobs </b>
                   <div ng-repeat="job in currentUser.jobs">
                     <p>{{job.title}} @ {{job.company_name}} </p>
+                  </div>
+                </div>
+                <div class="education">
+                  <b> Specialties </b>
+                  <div>
+                    <p>{{currentUser.specialty}}</p>
                   </div>
                 </div>
                 <div class="add_info">

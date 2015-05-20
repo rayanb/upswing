@@ -9,20 +9,20 @@
           <div class="info">
             <div class="professional_info">
               <p class="title"> {{user.job}}</p>
-              <b> Education </b>
-              <div class="education" ng-repeat="education in user.educations">
-                <p>{{education.field_of_study}} at {{education.school_name}}</p>
-              </div>
               <b> Jobs </b>
               <div class="jobs" ng-repeat="job in user.jobs">
                 <p>{{job.title}} @ {{job.company_name}} </p>
+              </div>
+              <div class="education">
+                <b> Specialties </b>
+                <p>{{user.specialty}}</p>
               </div>
               <div class="add_info">
                 <p>{{user.email}}</p>
               </div>
             </div>
 
-            <div class="golf_info">
+            <div class="golf_info" style="margin-top: 0px;">
               <p> Loves to play at {{user.golfcourse}} </p>
               <p> Handicap Index {{user.handicap}}</p>
               <p>Rounds played a year {{user.rounds_played}}</p>
