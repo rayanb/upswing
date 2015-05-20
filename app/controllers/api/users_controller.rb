@@ -30,7 +30,6 @@ class Api::UsersController < ApplicationController
 
   def create
     user_creation     = User.from_omniauth(env["omniauth.auth"])
-    puts "IT WAS HERE FOR A WHILE"
     session[:user_id] = user_creation[:user].id
     if user_creation[:message] == "already"
       redirect_to users_path
@@ -43,22 +42,18 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    puts "FIRST PARAAMS"
-    puts params
-    user = User.find(session[:user_id])
-    puts "PARAAAMS"
-    puts user_params
+    user          = User.find(params[:id])
+    user.industry = Industry.find_or_create_by(name: professional_params['industry'])
+    user.jobs     = [
+      Job.find_or_create_by(company_name: professional_params['company1'], title: professional_params['job1'], user_id: user.id),
+      Job.find_or_create_by(company_name: professional_params['company2'], title: professional_params['job2'], user_id: user.id)
+    ]
     user.update(user_params)
-    if user.save
-      message = "/users"
-    else
-      message = "fail"
-    end
+    message   = user.save ? "/users" : "fail"
     render json: message
   end
 
   def logout
-    puts "h"
     session[:user_id] = nil
     redirect_to '/'
   end
@@ -71,12 +66,16 @@ class Api::UsersController < ApplicationController
   private
 
   def find_users(range, industries)
-    cuser = User.includes(:industry, :friends, :inverse_friends, :educations, :jobs).find(session[:user_id])
-    users = User.includes(:industry, :friends, :inverse_friends, :educations, :jobs).where.not(id: session[:user_id]).where(industry_id: industries).within(range, origin: cuser) - cuser.all_friends - cuser.requests
+    cuser = User.includes(:industry, :friends, :inverse_friends, :jobs).find(session[:user_id])
+    users = User.includes(:industry, :friends, :inverse_friends, :jobs).where.not(id: session[:user_id]).where(industry_id: industries).within(range, origin: cuser) - cuser.all_friends - cuser.requests
   end
 
   def user_params
-    params.permit(:golf_course, :handicap, :rounds_played, :member_at, :favorite_club, :description, :availability )
+    params.permit(:golfcourse, :handicap, :rounds_played, :member_at, :favorite_club, :description, :availability, :specialty, :job, :email)
+  end
+
+  def professional_params
+    params.permit(:industry, :job1, :job2, :company1, :company2)
   end
 
 end
