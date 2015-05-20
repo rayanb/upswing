@@ -100,6 +100,10 @@ button.upvote{
   width: 50%;
 }
 
+.golf_info{
+  padding-top: 10px !important;
+}
+
 
 .info_img{
   margin: 0 15%;
@@ -179,9 +183,6 @@ button.upvote{
   height: 3.2%;
 }
 
-.golf_info{
-  padding-top: 4%;
-}
 .golf_info p{
   height: 2.8%;
 }
@@ -224,7 +225,7 @@ button.upvote{
 
    .user_display{
       margin: 1% 1%;
-      min-width: 330px;
+      min-width: 300px;
       padding: 0.5% 0.5%;
     }
 
@@ -237,9 +238,4 @@ button.upvote{
       top: 16%;
     }
 
-
-}
-
-body{
-  zoom: 0.9 !important;
 }
