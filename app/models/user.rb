@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
                    :distance_field_name => :distance,
                    :lat_column_name => :location_latitude,
                    :lng_column_name => :location_longitude
+
   belongs_to :industry
   has_many :friendships
   has_many :friends, :through => :friendships
@@ -13,11 +14,10 @@ class User < ActiveRecord::Base
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   has_many :friend_requests
   has_many :requests, :through => :friend_requests, source: :friend
-  has_many :educations
   has_many :jobs
 
-  def self.exists?(email)
-    if User.find_by(email: email)
+  def self.exists?(uid)
+    if User.find_by(uid: uid)
       return "already"
     else
       return "new user"
@@ -29,14 +29,17 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    puts auth.inspect
-    message = User.exists?(auth.info.email)
+    message = User.exists?(auth.uid)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.provider    = auth.provider
       user.uid         = auth.uid
       user.name        = auth.info.name
-      user.email       = auth.info.email
-      user.location_city    = auth.info.location.name
+      user.email       = auth.info.email if auth.info.email
+      if auth.info.location.is_a?(Hash)
+        user.location_city    = auth.info.location.name
+      else
+        user.location_city    = auth.info.location
+      end
       user.picture_url = auth.info.image
       user.industry    = Industry.find_or_create_by(name: auth.extra.raw_info.industry) if auth.extra.raw_info.industry
       user.job         = auth.extra.raw_info.headline if auth.extra.raw_info.headline
@@ -45,7 +48,10 @@ class User < ActiveRecord::Base
       user.save!
       @current_user = user
     end
-    @current_user.sync_full_profile
+    if @current_user.provider == "linkedin"
+      @current_user.sync_full_profile
+    elsif @current_user.provider == "facebook"
+    end
     return {message: message, user: @current_user}
   end
 
@@ -57,17 +63,20 @@ class User < ActiveRecord::Base
 
   def sync_full_profile
     api          = LinkedIn::API.new(oauth_token)
-    full_profile =  api.profile(fields: ["id", {"positions" => ["title", "company"]}, "educations"=>["school_name", "field_of_study"]])
-    if full_profile
-      positions    = full_profile.positions.all.take(2)
-      education    = full_profile.educations.all.take(2)
-      if positions.length > 0
-        positions.map{|position|  Job.find_or_create_by(company_name: position.company.name, title: position.title, user_id: id)}
-      end
-      if education.length > 0
-        education.map{|school| Education.find_or_create_by(school_name: school.school_name,  field_of_study: school.field_of_study, user_id: id)}
-      end
+    full_profile =  api.profile(fields: ["id", {"positions" => ["title", "company"]}, "specialties", "summary"])
+    puts full_profile.summary
+    puts full_profile.specialties
+    positions    = full_profile.positions.all.take(4)
+    if positions.length > 0
+      positions.map{|position|  Job.find_or_create_by(company_name: position.company.name, title: position.title, user_id: id)}
     end
+    if full_profile.specialties
+      self.specialty =  full_profile.specialties
+    else
+      short_summary = "#{full_profile.summary.split(" ").first(30).join(" ")} ..."
+      self.specialty =  short_summary
+    end
+    save!
   end
 
 end
