@@ -7,6 +7,7 @@ gem 'pg'
 
 # OAUTH gems
 gem 'omniauth-linkedin-oauth2'
+gem 'omniauth-facebook'
 gem 'linkedin-oauth2'
 
 # GEO-localisation gem
