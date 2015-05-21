@@ -37,9 +37,9 @@ class User < ActiveRecord::Base
       user.name        = auth.info.name
       user.email       = auth.info.email if auth.info.email
       user.picture_url = auth.info.image
-      if auth.info.location.is_a?(Hash)
+      if auth.info.location && auth.info.location.is_a?(Hash)
         user.location_city    = auth.info.location.name
-      else
+      elsif auth.info.location
         user.location_city    = auth.info.location
       end
       if auth.extra.raw_info.industry
