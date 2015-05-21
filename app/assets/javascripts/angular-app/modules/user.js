@@ -1,1 +1,1 @@
-golfApp = angular.module('app.golfApp', ['ngAnimate'])
+golfApp = angular.module('app.golfApp', [])

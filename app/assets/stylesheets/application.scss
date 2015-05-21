@@ -11,15 +11,7 @@
  * file per style scope.
  *
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
-
- *= require font-awesome
- *= require forms
  *= require main
+ *= require form
  *= require_self
  */
-
- body{
-  zoom: 0.9 !important;
-}

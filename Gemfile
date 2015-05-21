@@ -27,7 +27,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 #styling
 gem "font-awesome-rails"
-gem 'bootstrap-sass', '~> 3.3.4'
 gem 'sass-rails', '>= 3.2'
 
 
