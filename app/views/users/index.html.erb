@@ -36,16 +36,16 @@
           <div class="info">
             <div class="professional_info">
               <p class="title"> {{user.job}}</p>
-              <div class="education">
-                <b> Education </b>
-                <div ng-repeat="education in user.educations">
-                  <p>{{education.field_of_study}} at {{education.school_name}}</p>
-                </div>
-              </div>
               <div class="jobs">
                 <b> Jobs </b>
                 <div ng-repeat="job in user.jobs">
                   <p>{{job.title}} @ {{job.company_name}} </p>
+                </div>
+              </div>
+              <div class="education">
+                <b> Specialties </b>
+                <div>
+                  <p>{{user.specialty}}</p>
                 </div>
               </div>
             </div>
