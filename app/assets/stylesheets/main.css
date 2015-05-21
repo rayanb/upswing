@@ -241,14 +241,14 @@ button.upvote{
 
 }
 
-    .user_display button{
-      right: 4%;
-      top: 60%;
-    }
+.user_display button{
+  right: 4%;
+  top: 60%;
+}
 
-    button.upvote{
-      top: 45%;
-    }
+button.upvote{
+  top: 45%;
+}
 .input-group{
   margin-bottom: 2em;
 }
