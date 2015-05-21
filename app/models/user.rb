@@ -30,19 +30,24 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     message = User.exists?(auth.uid)
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+    where(provider: auth.provider, uid: auth.uid)
+    .first_or_initialize.tap do |user|
       user.provider    = auth.provider
       user.uid         = auth.uid
       user.name        = auth.info.name
       user.email       = auth.info.email if auth.info.email
+      user.picture_url = auth.info.image
       if auth.info.location.is_a?(Hash)
         user.location_city    = auth.info.location.name
       else
         user.location_city    = auth.info.location
       end
-      user.picture_url = auth.info.image
-      user.industry    = Industry.find_or_create_by(name: auth.extra.raw_info.industry) if auth.extra.raw_info.industry
-      user.job         = auth.extra.raw_info.headline if auth.extra.raw_info.headline
+      if auth.extra.raw_info.industry
+        user.industry    = Industry.find_or_create_by(name: auth.extra.raw_info.industry)
+      end
+      if auth.extra && auth.extra.raw_info.headline
+        user.job         = auth.extra.raw_info.headline
+      end
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
@@ -64,17 +69,17 @@ class User < ActiveRecord::Base
   def sync_full_profile
     api          = LinkedIn::API.new(oauth_token)
     full_profile =  api.profile(fields: ["id", {"positions" => ["title", "company"]}, "specialties", "summary"])
-    puts full_profile.summary
-    puts full_profile.specialties
-    positions    = full_profile.positions.all.take(4)
-    if positions.length > 0
+    positions    = full_profile.positions.all.take(2)
+    if positions && positions.length > 0
       positions.map{|position|  Job.find_or_create_by(company_name: position.company.name, title: position.title, user_id: id)}
     end
     if full_profile.specialties
       self.specialty =  full_profile.specialties
-    else
+    elsif full_profile.summary
       short_summary = "#{full_profile.summary.split(" ").first(30).join(" ")} ..."
       self.specialty =  short_summary
+    else
+      self.specialty = "No Specialties described by the user"
     end
     save!
   end
