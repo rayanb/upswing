@@ -42,11 +42,15 @@ class User < ActiveRecord::Base
       elsif auth.info.location
         user.location_city    = auth.info.location
       end
-      if auth.extra.raw_info.industry
-        user.industry    = Industry.find_or_create_by(name: auth.extra.raw_info.industry)
-      end
-      if auth.extra && auth.extra.raw_info.headline
-        user.job         = auth.extra.raw_info.headline
+      if auth.extra
+        if auth.extra.raw_info && auth.extra.raw_info.industry
+          user.industry    = Industry.find_or_create_by(name: auth.extra.raw_info.industry)
+        end
+        if auth.extra.raw_info && auth.extra.raw_info.headline
+          user.job         = auth.extra.raw_info.headline
+        end
+      else
+        user.provider == "facebook"
       end
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
