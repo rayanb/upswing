@@ -30,6 +30,7 @@ gem "font-awesome-rails"
 gem 'sass-rails', '>= 3.2'
 
 gem 'rails_12factor', group: :production
+gem 'rails_stdout_logging'
 
 
 group :development, :test do
