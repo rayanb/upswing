@@ -29,6 +29,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "font-awesome-rails"
 gem 'sass-rails', '>= 3.2'
 
+gem 'rails_12factor', group: :production
+
 
 group :development, :test do
   gem 'faker'

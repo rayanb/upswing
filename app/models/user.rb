@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
+    puts "HEEERE"
     message = User.exists?(auth.uid)
     where(provider: auth.provider, uid: auth.uid)
     .first_or_initialize.tap do |user|
