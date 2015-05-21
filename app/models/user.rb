@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
   def sync_full_profile
     api          = LinkedIn::API.new(oauth_token)
     full_profile =  api.profile(fields: ["id", {"positions" => ["title", "company"]}, "specialties", "summary"])
-    positions    = full_profile.positions.all.take(2)
+    positions    = full_profile.positions.all.take(2) if full_profile.positions.all
     if positions && positions.length > 0
       positions.map{|position|  Job.find_or_create_by(company_name: position.company.name, title: position.title, user_id: id)}
     end
