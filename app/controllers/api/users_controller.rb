@@ -50,7 +50,7 @@ class Api::UsersController < ApplicationController
     ]
     user.update(user_params)
     message   = user.save ? "/users" : "fail"
-    render json: message
+    render json: {message: message}
   end
 
   def logout

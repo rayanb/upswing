@@ -64,7 +64,8 @@ input[type=checkbox]:checked + label:before {
   margin-right: 5em;
 }
 
-.edit_user{
+.edit_user,
+.user{
   border: 1px solid grey;
   padding: 0.5em;
   background: rgba(101,112,92,0.9);
@@ -78,7 +79,8 @@ input[type=checkbox]:checked + label:before {
   border-radius: 20px;
 }
 
-.edit_form{
+.edit_form,
+.preferences_form{
   background-color: #ecf0f1;
   padding: 1.2em 1.2em;
   border-radius: 5px;
@@ -130,6 +132,11 @@ input[type=checkbox]:checked + label:before {
 
   .edit_user{
     height: 46em;
+  }
+
+  .user{
+    height: 30em;
+    margin-top: 2em;
   }
 
   .golf_edit{

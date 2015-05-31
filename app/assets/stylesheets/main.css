@@ -1,32 +1,23 @@
-html{
-  zoom: 0.9 !important;
+.industries{
+  height: 4em;
+  padding: 1em 1em;
+  margin: 1em 0;
+  overflow: hidden;
+}
+.industry_name{
+  float: left;
+  margin-right: 2em;
 }
 
-body{
-  background-image: url('http://www.powerlineplus.com/wp-content/uploads/2013/08/Grey-background-for-site11.jpg');
-  background-color: grey;
-  background-size: 100%;
-  background-position: fixed;
-  zoom: 0.9 !important;
+#prefs{
+  height: 20%;
+  overflow: hidden;
 }
 
 
 .oauth_linkedin{
   width: 20%;
   margin-left: 5%;
-}
-
-
-.navbar{
-  background-color: #36373E;
-}
-
-.collapse{
-  color: white;
-}
-
-.icon-bar{
-   background-color: white;
 }
 
 .profile_img{
@@ -36,32 +27,9 @@ body{
   height: 2.2em;
 }
 
-.navbar-nav li a {
-  font-size: 16px;
-  margin-top: 10px !important;
-  color: #F1F2F4;
-}
-
-.user,
-.preferences_form{
-  position: absolute;
-  background-color: #36373E;
-  color: white;
-  border-radius: 2px;
-  margin: 2% 2%;
-  width: 70%;
-  padding-bottom: 3%;
-  border-radius: 10px;
-}
 
 .preferences_form{
-  padding: 4% 4%;
-}
-
-.user_display{
-  margin: 1% 0%;
-  min-width: 330px;
-  padding: 2% 2%;
+  padding: 2% 4%;
 }
 
 .user_display button{
@@ -99,14 +67,6 @@ button.upvote{
   text-align: center;
   float: left;
   width: 50%;
-}
-
-.golf_info{
-  padding-top: 10% !important;
-}
-
-.golf_info1{
-  padding-top:19%;
 }
 
 
@@ -222,21 +182,26 @@ button.upvote{
 }
 
 @media screen and (min-width: 800px) {
-   .education,
-   .jobs,
-   .golf_info,
-   .golf_info1 { display: block; }
+ .education,
+ .jobs,
+ .golf_info,
+ .golf_info1 { display: block; }
 
-   .professional_info{
-      border-right: 1px solid grey;
-      width: 50%;
-    }
+ .professional_info{
+  border-right: 1px solid grey;
+  width: 50%;
+}
 
-   .user_display{
-      margin: 1% 1%;
-      min-width: 300px;
-      padding: 0.5% 0.5%;
-    }
+.user_display{
+  margin: 1% 1%;
+  min-width: 300px;
+  padding: 0.5% 0.5%;
+}
+
+.well{
+  margin-top: 2em;
+  height: 40em;
+}
 
 
 }
@@ -251,8 +216,4 @@ button.upvote{
 }
 .input-group{
   margin-bottom: 2em;
-}
-
-.dropdown-menu li a{
-  color: black !important;
 }

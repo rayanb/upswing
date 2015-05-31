@@ -2,7 +2,7 @@ class Api::FriendshipsController < ApplicationController
   include UsersHelper
 
   def index
-    user = User.find(params[:user_id])
+    user = User.includes(:friends, :inverse_friends).find(params[:user_id])
     friends = ActiveModel::ArraySerializer
          .new(user.all_friends, each_serializer: UserSerializer)
     render json: {friends: friends}
@@ -13,10 +13,10 @@ class Api::FriendshipsController < ApplicationController
     friend_id = params[:friend_id]
     if FriendRequest.find_by(user_id: friend_id, friend_id: user_id)
       Friendship.create(user_id: user_id, friend_id: friend_id)
-      render json: 'friendship'
+      render json: {status: 'friendship'}
     else
       FriendRequest.create(user_id: user_id, friend_id: friend_id)
-      render json: "request"
+      render json: {status: "request"}
     end
   end
 

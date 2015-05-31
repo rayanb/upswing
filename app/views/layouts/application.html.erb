@@ -1,65 +1,97 @@
 <!DOCTYPE html>
-<html ng-app="app.golfApp">
-<head>
-  <title>BeinGolf</title>
-  <meta name="viewport" content="width=device-width, initial-scale=0.9">
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-  <%= csrf_meta_tags %>
-</head>
-<body style="zoom:0.9">
+<html lang="en" ng-app="app.golfApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Upswing" %></title>
+    <%= csrf_meta_tags %>
 
-  <header class="navbar navbar-static-top bs-docs-nav" id="top navigation" role="banner">
-    <div class="container">
-      <div class="navbar-header">
-        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <%= stylesheet_link_tag "application", :media => "all" %>
+
+    <!-- For third-generation iPad with high-resolution Retina display: -->
+    <!-- Size should be 144 x 144 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
+
+    <!-- For iPhone with high-resolution Retina display: -->
+    <!-- Size should be 114 x 114 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
+
+    <!-- For first- and second-generation iPad: -->
+    <!-- Size should be 72 x 72 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
+
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <!-- Size should be 57 x 57 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+
+    <!-- For all other devices -->
+    <!-- Size should be 32 x 32 pixels -->
+    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+
+    <%= javascript_include_tag "application" %>
+  </head>
+  <body>
+
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="/users" class="navbar-brand"><i class="fa fa-rocket fa-2x"></i></a>
-      </div>
-      <nav class="collapse navbar-collapse bs-navbar-collapse">
-        <% if current_user %>
-        <ul class="nav navbar-nav">
-          <li>
-            <!-- news feed -->
-            <a href="#">Home</a>
-          </li>
-          <li>
-            <a href="/users">Find People</a>
-          </li>
-          <li>
-            <a href="/users/<%=current_user.id%>/friends">Friends</a>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/users/<%=current_user.id%>"><img class="profile_img"src="<%=current_user.picture_url%>"></a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Settings<span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="/users/<%=current_user.id%>/edit">Edit profile</a></li>
-              <li><a href="/auth/signout">Logout</a></li>
+         <a href="/users" class="navbar-brand"><i class="fa fa-rocket fa-2x"></i></a>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+            <% if current_user %>
+            <ul class="nav navbar-nav">
+              <li><%= link_to "Find users", "/users"  %></li>
+              <li><%= link_to "Friends", "/users/#{current_user.id}/friends"  %></li>
             </ul>
-          </li>
+            <ul class="nav navbar-nav navbar-right">
+            <li><a href="/users/<%=current_user.id%>"><img class="profile_img" src="<%=current_user.picture_url%>" style="width: 2.2em; padding: 0 0; margin-top: -0.2em"></a></li>
+            <li><a href="/auth/signout"> Signout </a></li>
         </ul>
-        <% else %>
-        <ul class="nav navbar-nav navbar-right" id="">
-          <li data-menuanchor="firstPage" class="active"><a href="#firstPage">About</a></li>
-          <li data-menuanchor="secondPage"><a href="#secondPage">Sign In</a></li>
-          <li data-menuanchor="3rdPage"><a href="#3rdPage">Team</a></li>
-          <% end  %>
-        </ul>
-      </nav>
+            <% else %>
+            <ul class="nav navbar-nav">
+              <li><a href="#firstPage"> About </a></li>
+              <li><a href="#secondPage"> Sign In </a></li>
+              <li><a href="#3rdPage"> Team </a></li>
+            </ul>
+            <%end%>
+          </ul>
+        </div>
+      </div>
     </div>
-  </header>
 
-  <div class="container">
-    <%= yield %>
-  </div>
-</body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9">
+          <%= bootstrap_flash %>
+          <%= yield %>
+        </div>
+        <div class="col-lg-3">
+          <div class="well sidebar-nav">
+            <h3>Chat or Ads</h3>
+            <ul class="nav nav-list">
+              <li class="nav-header">Sidebar</li>
+              <li><%= link_to "Feature", "/path1"  %></li>
+              <li><%= link_to "To be ", "/path2"  %></li>
+              <li><%= link_to "Implemented", "/path3"  %></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <footer>
+        <p>&copy; UpSwing 2015</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+  </body>
 </html>

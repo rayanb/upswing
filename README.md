@@ -1,2 +1,1 @@
-# upswing
-Social networking app for golfers.
+# golf

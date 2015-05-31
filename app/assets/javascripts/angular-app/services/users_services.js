@@ -18,7 +18,7 @@ golfApp.service('Users', ['$log', '$http', function($log, $http){
     edit: function(current_user_id, form, callback){
       $http.put('/api/users/'+current_user_id+'?='+ form)
       .then(function(response){
-        if(response.data == "fail"){
+        if(response.data.message == "fail"){
           alert('Editing failed')
         }else{
           callback(response.data)

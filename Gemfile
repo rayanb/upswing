@@ -19,6 +19,7 @@ gem 'active_model_serializers'
 #Javascript
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
+gem 'angularjs-rails'
 gem 'angular-rails-templates'
 gem 'angular_rails_csrf'
 gem 'bower-rails'
@@ -27,7 +28,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 #styling
 gem "font-awesome-rails"
-gem 'sass-rails', '>= 3.2'
+gem "therubyracer"
+gem "less-rails"
+gem "twitter-bootstrap-rails"
 
 gem 'rails_12factor', group: :production
 gem 'rails_stdout_logging'
@@ -41,5 +44,6 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'sqlite3'
+  gem "jasmine", github: "pivotal/jasmine-gem"
 end
 

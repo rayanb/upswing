@@ -16,18 +16,19 @@ golfApp.controller("usersController", [
         $scope.users = data.users;
         $scope.currentUser = data.currentUser;
         $scope.doneSearch = true;
-        if($scope.users.length == 0){
+
+        if($scope.users[0].length == 0){
           $scope.noUsers=true;
         }
-        if($scope.users.length){
+        else{
           $('.user').css('display', 'block')
         }
+
       });
     }
 
 
     $scope.createParameters = function(prefs, range){
-
       var selectedPrefs = [];
       $('input[name="preference"]:checked').map(function(){
         selectedPrefs.push(parseInt(this.value));
@@ -40,19 +41,21 @@ golfApp.controller("usersController", [
 
     $scope.createConnection = function(user){
       $('.user'+user.id).fadeOut()
-      .animate({opacity: 0.2, right:"-=2000"}, 1500)
-      Friendship.create($scope.currentUser, user ,
+      .animate({opacity: 0.2}, 1500);
+      Friendship.create($scope.currentUser, user,
         function(type){
           if(type.data=="friendship"){
-            alert('You got a match with '+ user.name+', you can send an-email to connect at '+ user.email)
-          }
-        })
-      var index = $scope.users.inde
+            alert('You got a match with '+ user.name+', you can send an-email to connect at '+ user.email);
+          };
+      })
+      console.log($scope.users)
+      $scope.users.splice(0,1)
     }
 
     $scope.createDisconnection = function(user){
       $('.user'+user.id).fadeOut()
-      .animate({opacity: 0.2, left:"-=2000"}, 1500)
+      .animate({opacity: 0.2, left:"-=2000"}, 1500);
+      $scope.users.splice(0,1)
     }
 
     Users.getCurrent(function(data){
@@ -61,7 +64,6 @@ golfApp.controller("usersController", [
 
     Industries.getAll(function(data){
       $scope.industries = data.industries;
-
     });
 
 
