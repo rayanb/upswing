@@ -1,4 +1,4 @@
-golfApp = angular.module('app.golfApp', ['templates', 'ui.router'])
+golfApp = angular.module('golfApp', ['app'])
 
 golfApp.config(function($stateProvider, $urlRouterProvider){
   $urlRouterProvider.otherwise('/home');
