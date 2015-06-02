@@ -9,16 +9,19 @@ golfApp.config(function($stateProvider, $urlRouterProvider){
     templateUrl: "<%= asset_path('angular-app/templates/home.html') %>",
     controller: 'UsersController'
   })
+
   .state('profile', {
     url: '/profile',
     templateUrl: "<%= asset_path('angular-app/templates/profile.html')%>",
     controller: 'ShowCtrl'
   })
+
   .state('friends', {
     url: '/friends',
     templateUrl: "<%= asset_path('angular-app/templates/friends.html')%>",
     controller: 'FriendsCtrl'
   })
+
   .state('edit',{
     url: '/edit',
     templateUrl: "<%= asset_path('angular-app/templates/edit.html')%>",
