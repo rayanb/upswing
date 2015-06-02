@@ -14,11 +14,12 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require angular
-//= require angular-rails-templates
+//= require angular-animate
 //= require angular-ui-router
+//= require angular-rails-templates
 //= require angular-app/app
+//= require_tree ./angular-app/templates
 //= require_tree ./angular-app/modules
 //= require_tree ./angular-app/services
 //= require_tree ./angular-app/controllers
-//= require_tree ./angular-app/templates
 
