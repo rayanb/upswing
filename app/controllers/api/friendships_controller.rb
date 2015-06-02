@@ -2,7 +2,7 @@ class Api::FriendshipsController < ApplicationController
   include UsersHelper
 
   def index
-    user = User.includes(:friends, :inverse_friends).find(params[:user_id])
+    user    = User.includes(:friends, :inverse_friends).find(params[:user_id])
     friends = ActiveModel::ArraySerializer
          .new(user.all_friends, each_serializer: UserSerializer)
     render json: {friends: friends}

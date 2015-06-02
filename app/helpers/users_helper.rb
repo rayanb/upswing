@@ -1,20 +1,12 @@
 module UsersHelper
 
   def current_user
-    if session[:user_id]
-      return User.find(session[:user_id])
-    else
-      return nil
-    end
+    User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
   def serialized_current_user
-    user = User.find_by(id: session[:user_id])
-    if user
-      UserSerializer.new(user).serializable_hash
-    else
-      nil
-    end
+    user = User.includes(:jobs).find_by(id: session[:user_id])
+    UserSerializer.new(user).serializable_hash if user
   end
 
   def not_edit_page?

@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key =>"friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   has_many :friend_requests
-  has_many :requests, :through => :friend_requests, source: :friend
+  has_many :friends_requested, :through => :friend_requests, source: :friend
   has_many :jobs
 
   def self.exists?(uid)
@@ -29,7 +29,6 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    puts "HEEERE"
     message = User.exists?(auth.uid)
     where(provider: auth.provider, uid: auth.uid)
     .first_or_initialize.tap do |user|
@@ -67,10 +66,7 @@ class User < ActiveRecord::Base
 
   def locate(ip_address)
     location = IpGeocoder.geocode(ip_address)
-    puts location.latitude
-    puts location.longitude
     update_attributes(location_city: location.city, location_state: location.state, location_longitude: location.longitude.to_f, location_latitude: location.latitude.to_f)
-    self.save
   end
 
   def sync_full_profile

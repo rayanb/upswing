@@ -1,0 +1,56 @@
+<div ng-controller="EditUserCtrl" class="edit_user">
+  <form class="edit_form" ng-submit="editInfo()">
+
+    <div ng-init= "editForm = 'golf'">
+        <div class="edit_filter">
+          <span ng-click="editForm = 'golf'" class="btn btn-default"> Golfing </span>
+          <span ng-click="editForm = 'professional'" ng-show="currentUser.provider !='linkedin'" class="btn btn-default"> Professional </span>
+      </div>
+  </div>
+
+  <div class="golf_edit" ng-show="editForm == 'golf'">
+    <label> Favorite Golf Course </label>
+    <input type="text" name="golfcourse" value="{{currentUser.golfcourse}}" style="display:none">
+    <input type="text" name="golfcourse" value="{{currentUser.golfcourse}}" class="form-control">
+    <label> Handicap Index </label>
+    <input type="text" name="handicap" value="{{currentUser.handicap}}" class="form-control">
+    <label> Rounds played a year </label>
+    <input type="text" name="rounds_played" value="{{currentUser.rounds_played}}" class="form-control">
+    <label> Member at </label>
+    <input type="text" name="member_at" value="{{currentUser.member_at}}" class="form-control">
+    <label> Favorite Club in your bag </label>
+    <input type="text" name="favorite_club" value="{{currentUser.favorite_club}}" class="form-control">
+    <label> When do you usually play </label>
+    <input type="text" name="availability" value="{{currentUser.availability}}" class="form-control">
+</div>
+
+<div class="professional_edit" ng-show="currentUser.provider != 'linkedin' && editForm == 'professional' ">
+    <label> Email Address </label>
+    <input type="text" name="email" value="{{currentUser.email}}" class="form-control">
+    <label> Professional Headline </label>
+    <input type="text" name="job" value="{{currentUser.job}}" class="form-control">
+    <label> Describe your specialty in a few words </label>
+    <div class="input-group input-group-lg col-sm-6 textarea_edit">
+        <textarea name="specialty" class="form-control input-lg" ng-model="currentUser.specialty" maxlength="120" id="textarea"> {{currentUser.specialty}} </textarea>
+        <span class="input-group-btn">
+            <button id="btnPost" type="button" class="btn btn-success" ng-disabled="currentUser.specialty.length < 5 || currentUser.specialty.length >= 121" ng-class="{'btn-warning': currentUser.specialty.length >= 20, 'btn-danger': currentUser.specialty.length >= 121 }">{{ 120 - currentUser.specialty.length }} characters left</button>
+        </span>
+   </div>
+
+   <label> Which industry do you belong to </label>
+   <input type="text" name="industry" value="{{currentUser.industry.name}}" class="form-control">
+   <label> Actual Job (eg: Head of Sales at Oracle) </label>
+   <div class="job_company">
+      <input type="text" name="job1" value="{{currentUser.jobs[0].title}}" class="form-control"> <span class="intersection_job"> @ </span> <input type="text" name="company1" value="{{currentUser.jobs[0].company_name}}" class="form-control">
+  </div>
+  <label> Former Job </label>
+  <div class="job_company">
+      <input type="text" name="job2" value="{{currentUser.jobs[1].title}}" class="form-control"> <span class="intersection_job"> @ </span><input type="text" name="company2" value="{{currentUser.jobs[1].company_name}}" class="form-control">
+  </div>
+</div>
+
+
+<input type="submit" class="btn btn-default">
+</form>
+
+</div>
