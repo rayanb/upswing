@@ -130,10 +130,6 @@ input[type=checkbox]:checked + label:before {
     height: 100%;
   }
 
-  .edit_user{
-    height: 46em;
-  }
-
   .user{
     height: 30em;
     margin-top: 2em;

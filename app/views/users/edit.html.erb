@@ -1,4 +1,4 @@
-<div ng-controller="EditUserCtrl" class="edit_user">
+<div ng-controller="EditUserCtrl" class="edit_user" style="zoom: 0.9">
   <form class="edit_form" ng-submit="editInfo()">
 
     <div ng-init= "editForm = 'golf'">
@@ -31,7 +31,7 @@
     <input type="text" name="job" value="{{currentUser.job}}" class="form-control">
     <label> Describe your specialty in a few words </label>
     <div class="input-group input-group-lg col-sm-6 textarea_edit">
-        <textarea name="specialty" class="form-control input-lg" ng-model="currentUser.specialty" maxlength="120" id="textarea"> {{currentUser.specialty}} </textarea>
+        <textarea name="specialty" class="form-control input-lg edit_specialty" ng-model="currentUser.specialty" maxlength="120" id="textarea"> {{currentUser.specialty}} </textarea>
         <span class="input-group-btn">
             <button id="btnPost" type="button" class="btn btn-success" ng-disabled="currentUser.specialty.length < 5 || currentUser.specialty.length >= 121" ng-class="{'btn-warning': currentUser.specialty.length >= 20, 'btn-danger': currentUser.specialty.length >= 121 }">{{ 120 - currentUser.specialty.length }} characters left</button>
         </span>
