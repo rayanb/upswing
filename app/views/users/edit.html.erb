@@ -1,4 +1,4 @@
-<div ng-controller="editUser" class="edit_user">
+<div ng-controller="EditUserCtrl" class="edit_user">
   <form class="edit_form" ng-submit="editInfo()">
 
     <div ng-init= "editForm = 'golf'">
@@ -54,3 +54,10 @@
 </form>
 
 </div>
+
+<script>
+  $('.navbar').on('click', function(e){
+    e.preventDefault();
+    alert('You have to finish editing your information before moving on ... please ?')
+  })
+</script>

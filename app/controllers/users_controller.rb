@@ -3,8 +3,6 @@ class UsersController < ApplicationController
   def index
   end
 
-  def show
-  end
 
   def create
     user_creation     = User.from_omniauth(env["omniauth.auth"])
@@ -14,9 +12,6 @@ class UsersController < ApplicationController
     else
       redirect_to edit_user_path(session[:user_id])
     end
-  end
-
-  def new
   end
 
   def edit

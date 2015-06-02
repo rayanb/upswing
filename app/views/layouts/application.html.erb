@@ -49,11 +49,11 @@
         <div class="navbar-collapse collapse navbar-responsive-collapse">
             <% if current_user %>
             <ul class="nav navbar-nav">
-              <li><%= link_to "Find users", "/users"  %></li>
-              <li><%= link_to "Friends", "/users/#{current_user.id}/friends"  %></li>
+              <li><a ui-sref="home"> Find Golfing Partners </a></li>
+              <li><a ui-sref="friends"> Friends </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-            <li><a href="/users/<%=current_user.id%>"><img class="profile_img" src="<%=current_user.picture_url%>" style="width: 2.2em; padding: 0 0; margin-top: -0.2em"></a></li>
+            <li><a ui-sref="profile"><img class="profile_img" src="<%=current_user.picture_url%>" style="width: 2.2em; padding: 0 0; margin-top: -0.2em"></a></li>
             <li><a href="/auth/signout"> Signout </a></li>
         </ul>
             <% else %>
@@ -72,16 +72,24 @@
       <div class="row">
         <div class="col-lg-9">
           <%= bootstrap_flash %>
-          <%= yield %>
+          <% if current_user && not_edit_page?  %>
+            <div ui-view></div>
+          <% else %>
+            <%= yield %>
+          <% end%>
         </div>
         <div class="col-lg-3">
           <div class="well sidebar-nav">
             <h3>Chat or Ads</h3>
             <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Feature", "/path1"  %></li>
-              <li><%= link_to "To be ", "/path2"  %></li>
-              <li><%= link_to "Implemented", "/path3"  %></li>
+              <% if current_user %>
+              <li class="nav-header"></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <% else %>
+              <li></li>
+              <% end  %>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->

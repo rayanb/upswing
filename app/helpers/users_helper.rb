@@ -17,4 +17,8 @@ module UsersHelper
     end
   end
 
+  def not_edit_page?
+    params[:action] != "edit"
+  end
+
 end

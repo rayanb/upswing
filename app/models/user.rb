@@ -67,6 +67,8 @@ class User < ActiveRecord::Base
 
   def locate(ip_address)
     location = IpGeocoder.geocode(ip_address)
+    puts location.latitude
+    puts location.longitude
     update_attributes(location_city: location.city, location_state: location.state, location_longitude: location.longitude.to_f, location_latitude: location.latitude.to_f)
     self.save
   end

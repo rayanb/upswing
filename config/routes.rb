@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
-  get '/', to: 'welcome#index'
+  get '/', to: 'welcome#welcome'
 
-  resources :users, except: [:update, :destroy] do
-    get '/friends', to: 'friendships#index'
-  end
-
+  resources :users, except: [:new, :update, :destroy]
 
   namespace :api do
     resources :users, defaults: { format: :json } do

@@ -1,4 +1,4 @@
-golfApp.controller('editUser', ['$scope', 'Users', function($scope, Users){
+golfApp.controller('EditUserCtrl', ['$scope', 'Users', function($scope, Users){
 
   Users.getCurrent(function(data){
     $scope.currentUser = data;
