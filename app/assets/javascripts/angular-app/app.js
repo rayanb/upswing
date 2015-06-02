@@ -1,5 +1,5 @@
 app = angular.module('app', [
-  'templates', 'ui.router'
+ 'ui.router'
   ]);
 
 app.config(function($httpProvider) {
